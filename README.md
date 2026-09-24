@@ -28,7 +28,7 @@ An interactive birthday card, a first-class "flight" from 39 to 40, and the emai
 
 ## Handy
 
-- Preview a single stop by adding its name to the link, e.g. `…/Projbd/#peacocks`. The names are `seat`, `menu`, `passport`, `peacocks`, `level`, `club`, `blessings`, `cake` and `letter`.
+- Preview a single stop by adding its name to the link, e.g. `…/Projbd/#peacocks`. The names are `seat`, `menu`, `passport`, `peacocks`, `friends`, `level`, `club`, `blessings`, `cake` and `letter`.
 - The pet names and signature are set in `CONFIG` at the top of `assets/card.js`.
 - Sound effects are all synthesised in the browser. The audio files are her song (`assets/music/cookies-original.mp3`) and the captain's voice (`assets/ai/captain.mp3`).
 - `assets/ai/` holds pieces made with Higgsfield: the captain's voice (Seed Audio), the painted postcards, the two paintings and the bouquet (Z-Image). None of them show people's faces.
