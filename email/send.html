@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Send the Boarding Pass</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #3a2140; --ink-soft: #6f5873; --pink: #f0438e; --rose: #c2185b; --line: #f6cadd; --bg: #fde9f2; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: Nunito, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .crew, .crew * { box-sizing: border-box; }
+  .crew { max-width: 600px; margin: 0 auto; padding: 28px 16px 4px; }
+  .kicker { margin: 0 0 6px; text-align: center; font-size: 12px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--rose); }
+  .crew h1 { margin: 0 0 20px; text-align: center; font: 600 30px/1.2 Fraunces, Georgia, serif; }
+  .steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+  .steps li { position: relative; padding: 15px 16px 15px 58px; border-radius: 18px; background: #fff; box-shadow: 0 8px 22px rgba(120, 60, 110, .1); font-size: 16px; line-height: 1.5; counter-increment: step; }
+  .steps li::before { content: counter(step); position: absolute; left: 15px; top: 14px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--pink); color: #fff; font-weight: 900; }
+  .steps small { color: var(--ink-soft); font-size: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; padding: 13px 22px; border: 0; border-radius: 999px; background: linear-gradient(135deg, #ff8cc0, #f0438e); box-shadow: 0 6px 16px rgba(240, 67, 142, .35); color: #fff; font: 900 16px/1 Nunito, system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+  .btn:disabled { opacity: .6; cursor: default; }
+  .btn.ghost { background: #fff; box-shadow: inset 0 0 0 2px var(--line); color: var(--rose); }
+  .btn.done { background: #1f9d6b; box-shadow: none; color: #fff; }
+  .linkish { padding: 0; border: 0; background: none; color: var(--rose); font: inherit; font-weight: 800; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  kbd { padding: 1px 6px; border: 1px solid var(--line); border-radius: 6px; background: #fff4f9; font: 800 13px/1.4 Nunito, system-ui, sans-serif; }
+  .tip { margin: 16px 6px 0; text-align: center; font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+  .tip a { color: var(--rose); font-weight: 800; }
+  .preview-label { margin: 30px 0 0; }
+  /* Keep this page's styles away from the email preview, like a real inbox */
+  #email { all: initial; display: block; }
+</style>
+</head>
+<body>
+<main class="crew">
+  <p class="kicker">Caveman Air · Ground crew only</p>
+  <h1>Send her the boarding pass ✈️</h1>
+  <ol class="steps">
+    <li><strong>Copy the email.</strong><br>
+      <button class="btn" id="copy-email" type="button" disabled>Loading the email…</button></li>
+    <li><strong>Open a new Gmail message</strong> on a computer. The subject is filled in for you.<br>
+      <a class="btn ghost" id="compose" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;su=%E2%9C%88%EF%B8%8F%20Cookies%2C%20your%20flight%20to%2040%20is%20now%20boarding" target="_blank" rel="noopener">Open Gmail ↗</a><br>
+      <small>No subject showing? <button class="linkish" id="copy-subject" type="button">Copy the subject</button> and paste it in.</small></li>
+    <li><strong>Click into the message and paste</strong> with <kbd>Ctrl</kbd>+<kbd>V</kbd> (or <kbd>⌘</kbd>+<kbd>V</kbd> on a Mac). The picture, the boarding pass and the button all come along.</li>
+    <li><strong>Send it to yourself first</strong> to see it exactly as she will. Happy? Do steps 2 and 3 again with her address, then press Send, or use the <strong>▾</strong> next to Send to <strong>Schedule send</strong> for her birthday morning.</li>
+  </ol>
+  <p class="tip">If a paste ever looks wrong, you can always just send her the link:<br><a href="https://omarramzi83.github.io/Projbd/">omarramzi83.github.io/Projbd</a></p>
+  <p class="kicker preview-label">What she’ll get</p>
+</main>
+<div id="email" aria-label="Email preview"></div>
+
+<script>
+(function () {
+  'use strict';
+  var SUBJECT = '✈️ Cookies, your flight to 40 is now boarding';
+  var TEXT = [
+    'Cookies, your first-class boarding pass for Flight BD40 is ready ✈️',
+    '',
+    'You’re flying non-stop from Thirty-nine to Forty, with a few very special stops along the way, all above the fluffiest clouds.',
+    '',
+    'Open your boarding pass: https://omarramzi83.github.io/Projbd/',
+    '(Best on your phone, with the sound on.)',
+    '',
+    'With all my love,',
+    'Your caveman 🦴'
+  ].join('\n');
+  var box = document.getElementById('email');
+  var copyEmail = document.getElementById('copy-email');
+  var copySubject = document.getElementById('copy-subject');
+  var html = '';
+
+  // One source of truth: the email itself lives in index.html next to this page
+  fetch('index.html', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function (src) {
+      var doc = new DOMParser().parseFromString(src, 'text/html');
+      // The hidden inbox preview line could turn visible once pasted, so leave it out
+      Array.prototype.forEach.call(doc.body.querySelectorAll('div'), function (d) {
+        if (/display\s*:\s*none/i.test(d.getAttribute('style') || '')) d.remove();
+      });
+      // Classes only feed the <style> block, which a paste drops anyway
+      Array.prototype.forEach.call(doc.body.querySelectorAll('[class]'), function (el) { el.removeAttribute('class'); });
+      html = doc.body.innerHTML.trim();
+      box.innerHTML = html;
+      copyEmail.disabled = false;
+      copyEmail.textContent = 'Copy the email 💌';
+    })
+    .catch(function () { copyEmail.textContent = 'Couldn’t load the email. Refresh to try again.'; });
+
+  function flash(btn, text, ok) {
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+    btn.textContent = text;
+    btn.classList.toggle('done', ok && btn.classList.contains('btn'));
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function () { btn.textContent = btn.dataset.label; btn.classList.remove('done'); }, 3000);
+  }
+
+  function copyBySelection(node) {
+    var sel = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(node);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    if (ok) sel.removeAllRanges(); // if it failed, leave it selected for a manual copy
+    return ok;
+  }
+
+  copyEmail.addEventListener('click', function () {
+    if (!html) return;
+    var fallback = function () {
+      if (copyBySelection(box)) flash(copyEmail, 'Copied! Now open Gmail ✓', true);
+      else flash(copyEmail, 'Selected. Press Ctrl+C (⌘C on a Mac)', false);
+    };
+    if (navigator.clipboard && window.ClipboardItem) {
+      // Called straight from the tap, which Safari insists on
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob(['<meta charset="utf-8">' + html], { type: 'text/html' }),
+        'text/plain': new Blob([TEXT], { type: 'text/plain' })
+      })]).then(function () { flash(copyEmail, 'Copied! Now open Gmail ✓', true); }, fallback);
+    } else {
+      fallback();
+    }
+  });
+
+  copySubject.addEventListener('click', function () {
+    var done = function () { flash(copySubject, 'Copied ✓', true); };
+    var manual = function () {
+      var ta = document.createElement('textarea');
+      ta.value = SUBJECT;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      if (ok) done(); else window.prompt('Copy the subject:', SUBJECT);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(SUBJECT).then(done, manual);
+    else manual();
+  });
+})();
+</script>
+</body>
+</html>

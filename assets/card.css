@@ -705,6 +705,8 @@ body.started #topbar > * { pointer-events: auto; }
 .reel-track::-webkit-scrollbar { display: none; }
 .reel-track .polaroid { flex: none; width: 176px; scroll-snap-align: center; }
 .end-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.also-on { margin: 12px 0 0; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+.also-on a { color: var(--rose-600); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 .footer-note { margin: 10px 0 0; text-align: center; font-size: 12px; line-height: 1.6; color: var(--ink-soft); }
 
 /* ───────── Transition + confetti ───────── */

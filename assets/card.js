@@ -924,7 +924,7 @@
       'Loolies & Mayoosh, and every squishy ever swapped.',
       'Every flight above the clouds, and every single upgrade.',
       'Peacock mornings on our porch in Lampung.',
-      'A family who adores you.',
+      'Cute nieces that adore you, and a caveman too!',
       'Forty whole years of you in this world.',
       'Your music, your style, your sparkle.',
       'Us. Always us.',
@@ -1210,6 +1210,8 @@
     hug.addEventListener('contextmenu', e => e.preventDefault());
     hug.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); start(); } });
     hug.addEventListener('keyup', e => { if (e.key === 'Enter' || e.key === ' ') cancel(); });
+    // Her Suno song shouldn't keep playing under John Mayer
+    $$('.song-link').forEach(a => a.addEventListener('click', () => Music.pause()));
     $('#replay').addEventListener('click', () => {
       try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ignore */ }
       location.reload();

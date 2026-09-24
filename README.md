@@ -3,7 +3,8 @@
 An interactive birthday card, a first-class "flight" from 39 to 40, and the email that delivers it.
 
 - **The card:** `index.html` + `assets/` → https://omarramzi83.github.io/Projbd/
-- **The email:** `email/index.html` (the same HTML as the Gmail draft), with the animated header `email/header.gif`
+- **The email:** `email/index.html`, with the animated header `email/header.gif`
+- **Sending it:** `email/send.html` → https://omarramzi83.github.io/Projbd/email/send.html copies the email so you can paste it into a new Gmail message
 
 ## The stops on the flight
 
@@ -25,6 +26,14 @@ An interactive birthday card, a first-class "flight" from 39 to 40, and the emai
 2. Under *Build and deployment*, choose **Deploy from a branch**.
 3. Pick the branch `claude/interactive-birthday-card-zaeqx9` and the folder `/ (root)`, then **Save**.
 4. About a minute later the card is live at https://omarramzi83.github.io/Projbd/
+
+## Send the email
+
+1. On a computer, open https://omarramzi83.github.io/Projbd/email/send.html and press **Copy the email**.
+2. Press **Open Gmail** (the subject is filled in), click into the message and paste.
+3. Send it to yourself first, then to her (or use **Schedule send**).
+
+Pasting it in yourself keeps the animated picture and the direct link. A draft made through the Gmail connector loses both: the connector strips images and sends links through a Google "Redirect Notice" page.
 
 ## Handy
 
