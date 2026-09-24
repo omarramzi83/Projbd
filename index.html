@@ -240,7 +240,7 @@
           <div class="notes-body" id="notes-body" hidden>
             <h3>Eau de <span class="nm">Cookies</span></h3>
             <p><b>Top notes:</b> sparkle &amp; sass</p>
-            <p><b>Heart notes:</b> kindness, laughter &amp; Loolies-and-Mayoosh</p>
+            <p><b>Heart notes:</b> pink peony, red rose &amp; Loolies-and-Mayoosh</p>
             <p><b>Base notes:</b> forty years of fabulous</p>
             <p class="small">Better than Dior. Don’t tell Chanel 🤫</p>
           </div>
@@ -536,7 +536,52 @@
     </div>
   </section>
 
-  <!-- 6 · Level 40 -->
+  <!-- 6 · Lampung friends: the turtle and the cockatoo -->
+  <section class="scene" data-key="friends">
+    <div class="inner">
+      <p class="kicker">Lampung · the other VIPs</p>
+      <h2 class="title">Our Lampung friends</h2>
+
+      <div class="friend card">
+        <figure class="polaroid" style="--r:-3deg">
+          <img src="assets/photos/turtle.jpg" alt="The big turtle you fed in Lampung" loading="lazy" decoding="async">
+          <figcaption>your best friend 🐢</figcaption>
+          <p class="nom" id="nom" aria-live="polite" hidden></p>
+        </figure>
+        <div class="friend-text">
+          <h3>The turtle</h3>
+          <p>You fed him and he adored you. Honestly? Same.</p>
+          <button class="btn small" id="feed" type="button">Feed him 🥬</button>
+          <p class="friend-reply" id="turtle-reply" hidden></p>
+        </div>
+      </div>
+
+      <div class="friend card">
+        <figure class="polaroid" style="--r:3deg">
+          <img src="assets/photos/cockatoo-shoulder.jpg" alt="The cockatoo sitting lovingly on my shoulder" loading="lazy" decoding="async">
+          <figcaption>my admirer 🦜</figcaption>
+        </figure>
+        <div class="friend-text">
+          <h3>The cockatoo</h3>
+          <p>Plot twist: this cockatoo fell in love with me and would not leave my shoulder.</p>
+          <p class="q">Should you be jealous?</p>
+          <div class="choices" id="choices">
+            <button class="chip big" type="button" data-j="yes">Yes 😤</button>
+            <button class="chip big" type="button" data-j="no">Obviously not 🙄</button>
+          </div>
+          <p class="friend-reply" id="jealous-reply" hidden></p>
+        </div>
+        <figure class="polaroid mini hello" id="hello" style="--r:-4deg" hidden>
+          <img src="assets/photos/cockatoo-hello.jpg" alt="The cockatoo reaching through its cage" loading="lazy" decoding="async">
+          <figcaption>still asking for me 👀</figcaption>
+        </figure>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Level 40 awaits ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 7 · Level 40 -->
   <section class="scene" data-key="level">
     <div class="inner">
       <div class="thought" id="thought">
@@ -560,7 +605,7 @@
     </div>
   </section>
 
-  <!-- 7 · The 40+ Club -->
+  <!-- 8 · The 40+ Club -->
   <section class="scene" data-key="club">
     <div class="inner">
       <p class="kicker">Late bloomers, legends &amp; you</p>
@@ -572,7 +617,7 @@
     </div>
   </section>
 
-  <!-- 8 · Blessings -->
+  <!-- 9 · Blessings -->
   <section class="scene" data-key="blessings">
     <div class="inner">
       <p class="kicker">Alhamdulillah</p>
@@ -590,7 +635,7 @@
     </div>
   </section>
 
-  <!-- 9 · Cake -->
+  <!-- 10 · Cake -->
   <section class="scene" data-key="cake" id="s-cake">
     <div class="inner">
       <div class="oc-head"><span class="oc-logo">Overcooked</span><span class="oc-ed">Birthday Edition</span></div>
@@ -668,7 +713,7 @@
     <div class="dimmer" id="dimmer" aria-hidden="true"></div>
   </section>
 
-  <!-- 10 · The letter -->
+  <!-- 11 · The letter -->
   <section class="scene" data-key="letter">
     <div class="inner">
       <p class="script letter-hero">Happy 40th Birthday</p>
@@ -687,8 +732,31 @@
         <p class="sig">— <span class="sign">Your caveman</span> 🦴</p>
       </article>
 
+      <div class="bouquet">
+        <p class="kicker">And since I can’t hand you these in person…</p>
+        <button class="bq" id="bq" type="button" aria-label="Unwrap your flowers">
+          <img src="assets/ai/bouquet.jpg" alt="A hand holding out a bouquet of pink peonies, red and pink roses and pink tulips against a sky of pink clouds" loading="lazy" decoding="async">
+          <span class="bq-wrap" aria-hidden="true"><span class="bq-bow">🎀</span><span class="bq-tap">Tap to unwrap</span></span>
+        </button>
+        <p class="bq-note reveal" id="bq-note">Peonies, red and pink roses and pink tulips… and not a single white flower. I know you 😌💐</p>
+      </div>
+
       <button class="hug" id="hug" type="button"><span class="hug-fill" aria-hidden="true"></span><span class="hug-label">Hold for a hug from me 🤗</span></button>
       <p class="hug-msg" id="hug-msg" hidden>Consider yourself squeezed 🤗 The real one is coming the moment I see you.</p>
+
+      <div class="gallery">
+        <p class="kicker">Two little paintings, just for you</p>
+        <div class="art-row">
+          <figure class="art" style="--r:-2deg">
+            <img src="assets/ai/painting-peacock.jpg" alt="A painting of a white peacock with its tail fanned out on a pink cloud, a little plane drawing a heart and a pink birthday cake" loading="lazy" decoding="async">
+            <a class="save" href="assets/ai/painting-peacock.jpg" download="birthday-painting-peacock.jpg">Save ↓</a>
+          </figure>
+          <figure class="art" style="--r:2deg">
+            <img src="assets/ai/painting-clouds.jpg" alt="A painting of a white peacock on fluffy clouds with a crystal perfume bottle, a pink birthday cake and a smiling peach squishy" loading="lazy" decoding="async">
+            <a class="save" href="assets/ai/painting-clouds.jpg" download="birthday-painting-clouds.jpg">Save ↓</a>
+          </figure>
+        </div>
+      </div>
 
       <div class="reel">
         <p class="kicker">Little memories</p>
@@ -699,6 +767,7 @@
           <figure class="polaroid" style="--r:3deg"><img src="assets/photos/perfume.jpg" alt="Two beautiful perfume bottles" loading="lazy" decoding="async"><figcaption>smells like you ✨</figcaption></figure>
           <figure class="polaroid" style="--r:-3deg"><img src="assets/photos/lampung-pool.jpg" alt="The infinity pool in Lampung at night" loading="lazy" decoding="async"><figcaption>Lampung nights 🌙</figcaption></figure>
           <figure class="polaroid" style="--r:2deg"><img src="assets/photos/caveman-beach.jpg" alt="Your caveman on the beach" loading="lazy" decoding="async"><figcaption>your caveman, off duty 🕶️</figcaption></figure>
+          <figure class="polaroid" style="--r:-2deg"><img src="assets/photos/caveman-pool.jpg" alt="Your caveman lounging by the pool at night in Lampung" loading="lazy" decoding="async"><figcaption>holiday mode: ON 🌙</figcaption></figure>
         </div>
       </div>
 
@@ -727,6 +796,7 @@
 
 <canvas id="confetti" aria-hidden="true"></canvas>
 <audio id="track" src="assets/music/cookies-original.mp3" preload="none" loop></audio>
+<audio id="captain-voice" src="assets/ai/captain.mp3" preload="none"></audio>
 
 <script src="assets/card.js"></script>
 </body>

@@ -250,8 +250,16 @@
       cx.bezierCurveTo(s * 0.45, -s, s, -s * 0.25, 0, s * 0.35);
       cx.fill();
     }
+    const PETALS = ['#e0245e', '#c2185b', '#ff6fab', '#ff9cc5', '#ff4f7a', '#f7a8c4'];
+    function petal(s) {
+      cx.beginPath();
+      cx.moveTo(0, -s * 0.62);
+      cx.bezierCurveTo(s * 0.58, -s * 0.42, s * 0.46, s * 0.5, 0, s * 0.62);
+      cx.bezierCurveTo(-s * 0.46, s * 0.5, -s * 0.58, -s * 0.42, 0, -s * 0.62);
+      cx.fill();
+    }
     function add(p) { parts.push(p); if (!raf) raf = requestAnimationFrame(tick); }
-    function burst({ x = W / 2, y = H / 3, n = 120, spread = Math.PI * 2, angle = -Math.PI / 2, speed = 9, hearts = 0.22 } = {}) {
+    function burst({ x = W / 2, y = H / 3, n = 120, spread = Math.PI * 2, angle = -Math.PI / 2, speed = 9, hearts = 0.22, petals = 0 } = {}) {
       if (reduced) n = Math.round(n / 3);
       for (let i = 0; i < n; i++) {
         const a = angle + (Math.random() - 0.5) * spread;
@@ -262,9 +270,10 @@
           c: COLORS[(Math.random() * COLORS.length) | 0],
           shape: Math.random() < hearts ? 2 : (Math.random() < 0.55 ? 0 : 1), w: Math.random() * 6.28, life: 0,
         });
+        if (Math.random() < petals) { const p = parts[parts.length - 1]; p.shape = 3; p.c = PETALS[(Math.random() * PETALS.length) | 0]; p.s += 4; }
       }
     }
-    function rain(n = 50, hearts = 0.6) {
+    function rain(n = 50, hearts = 0.6, petals = 0) {
       if (reduced) n = Math.round(n / 3);
       for (let i = 0; i < n; i++) {
         add({
@@ -272,6 +281,7 @@
           r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.08, s: 7 + Math.random() * 7,
           c: COLORS[(Math.random() * 5) | 0], shape: Math.random() < hearts ? 2 : 1, w: Math.random() * 6.28, life: 0,
         });
+        if (Math.random() < petals) { const p = parts[parts.length - 1]; p.shape = 3; p.c = PETALS[(Math.random() * PETALS.length) | 0]; }
       }
     }
     function tick() {
@@ -284,7 +294,8 @@
         cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c;
         if (p.shape === 0) cx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
         else if (p.shape === 1) { cx.beginPath(); cx.arc(0, 0, p.s / 2.6, 0, 6.283); cx.fill(); }
-        else heart(p.s * 0.9);
+        else if (p.shape === 2) heart(p.s * 0.9);
+        else petal(p.s);
         cx.restore();
       }
       if (parts.length) raf = requestAnimationFrame(tick);
@@ -361,6 +372,8 @@
     if (busy || i === cur || i < 0 || i >= scenes.length) return;
     busy = true;
     try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+    const cv = $('#captain-voice');
+    if (cv && !cv.paused) cv.pause();
     Sound.breeze();
     await Wipe.cover();
     const leaving = keys[cur];
@@ -491,7 +504,7 @@
       cap.classList.add('on');
       scrollTo(cap, 'center');
       await typeCaptain();
-      if ('speechSynthesis' in window) $('#hear').hidden = false;
+      $('#hear').hidden = false;
       await wait(500);
       const ife = $('#ife');
       ife.classList.add('on');
@@ -516,18 +529,23 @@
       el.textContent = CAPTAIN;
     }
 
-    $('#hear').addEventListener('click', e => {
-      e.stopPropagation();
+    const voice = $('#captain-voice');
+    let resumeAfterVoice = false;
+    voice.addEventListener('ended', () => { if (resumeAfterVoice) { resumeAfterVoice = false; Music.play(); } });
+    function speakFallback() {
       try {
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(`Ugh. This is your captain speaking. Your caveman. Happy birthday, ${CONFIG.name}. Me love you. Ugh.`);
-        u.rate = 0.8; u.pitch = 0.1; u.volume = 1;
-        const vs = speechSynthesis.getVoices();
-        const v = vs.find(x => /^en[-_]GB/i.test(x.lang) && /daniel|arthur|george|male/i.test(x.name)) || vs.find(x => /^en[-_]/i.test(x.lang));
-        if (v) u.voice = v;
-        if (Music.playing) { Music.pause(); u.onend = () => Music.play(); }
+        u.rate = 0.8; u.pitch = 0.1;
         speechSynthesis.speak(u);
       } catch (err) { /* no speech on this device */ }
+    }
+    $('#hear').addEventListener('click', async e => {
+      e.stopPropagation();
+      Sound.unlock();
+      if (Music.playing) { Music.pause(); resumeAfterVoice = true; }
+      voice.muted = Sound.muted;
+      try { voice.currentTime = 0; await voice.play(); } catch (err) { speakFallback(); if (resumeAfterVoice) { resumeAfterVoice = false; setTimeout(() => Music.play(), 4000); } }
     });
 
     let sprayed = false;
@@ -597,11 +615,11 @@
       pad('4040BD40<<TITANIUM<ELITE<<UPGRADED<ALWAYS', 44).replace(/</g, '&lt;');
 
     const P = {
-      bali: { t: 'Bali 🌺', p: 'Frangipani, sunsets and a pool villa. Upgraded, obviously.' },
-      hk: { t: 'Hong Kong 🌃', p: 'Skyline sparkle, dim sum and a harbour-view suite. Your Rich Girl era.' },
+      bali: { t: 'Bali 🌺', p: 'Pink frangipani, sunsets and a pool villa. Upgraded, obviously.', art: ['postcard-bali.jpg', 'A painted postcard of a Balinese temple gate at sunset', 'wish you were here 💌'] },
+      hk: { t: 'Hong Kong 🌃', p: 'Skyline sparkle, dim sum and a harbour-view suite. Your Rich Girl era.', art: ['postcard-hk.jpg', 'A painted postcard of Victoria Harbour with a red-sailed junk', 'harbour-view suite, please ✨'] },
       london: { t: 'London 💕', p: 'Home of your Loolies & Mayoosh, and the world’s most important squishy exchange.', ph: [['nieces.jpg', 'Loolies & Mayoosh', -3], ['niece-hearts.jpg', 'heart gems 💗', 3]] },
       lampung: { t: 'Lampung 🦚', p: 'Peacocks on our porch, an infinity pool under the stars… and a volcano that couldn’t stop us.', ph: [['lampung-pool.jpg', 'Lampung nights 🌙', -2]] },
-      jakarta: { t: 'Jakarta 🌏', p: 'The ground literally shook. We didn’t. Nothing can keep us down.' },
+      jakarta: { t: 'Jakarta 🌏', p: 'The ground literally shook. We didn’t. Nothing can keep us down.', art: ['postcard-jakarta.jpg', 'A painted postcard of Jakarta’s Monas monument at golden hour', 'still standing 💪'] },
     };
     const sheet = $('#pc-sheet'), card = $('#postcard');
     const done = new Set();
@@ -610,6 +628,7 @@
       const all = done.size === Object.keys(P).length;
       card.innerHTML =
         `<p class="kicker">Postcard from</p><h3>${d.t}</h3><p class="pc-text">${d.p}</p>` +
+        (d.art ? `<figure class="pc-art"><img src="assets/ai/${d.art[0]}" alt="${d.art[1]}"><figcaption>${d.art[2]}</figcaption></figure>` : '') +
         (d.ph ? `<div class="pc-photos">${d.ph.map(([f, c, r]) => `<figure class="polaroid" style="--r:${r}deg"><img src="assets/photos/${f}" alt="${c}"><figcaption>${c}</figcaption></figure>`).join('')}</div>` : '') +
         `<button class="btn" type="button" data-close>${all ? 'All stamped ✈️' : 'Next stamp ›'}</button>`;
       sheet.hidden = false;
@@ -724,7 +743,73 @@
     return {};
   })();
 
-  /* 6 · Level 40 */
+  /* 6 · Lampung friends: feed the turtle, and the cockatoo who fell for me */
+  ctrl.friends = (() => {
+    const S = sceneEl('friends');
+    const nom = $('#nom'), feed = $('#feed'), treply = $('#turtle-reply');
+    let fed = 0, talking = false, answered = false;
+    feed.addEventListener('click', async () => {
+      if (talking) return;
+      Sound.unlock();
+      fed++;
+      // a leaf flies to the turtle
+      const photo = $('img', nom.parentElement);
+      const [fx, fy] = centre(feed), [tx, ty] = centre(photo);
+      const leaf = document.createElement('span');
+      leaf.className = 'fly-leaf'; leaf.textContent = '🥬';
+      leaf.style.left = (fx - 15) + 'px'; leaf.style.top = (fy - 15) + 'px';
+      document.body.appendChild(leaf);
+      if (leaf.animate) {
+        await leaf.animate([{ transform: 'translate(0,0) rotate(0) scale(1)' }, { transform: `translate(${tx - fx}px, ${ty - fy - 30}px) rotate(200deg) scale(.7)` }],
+          { duration: 650, easing: 'cubic-bezier(.3,.6,.3,1)', fill: 'forwards' }).finished.catch(() => {});
+      }
+      leaf.remove();
+      Sound.chop(); setTimeout(() => Sound.chop(), 180); setTimeout(() => Sound.chop(), 360); buzz([15, 40, 15]);
+      nom.hidden = false;
+      nom.textContent = ['Nom nom nom 🥬', 'More please… 🐢', 'Nom. Nom. NOM. 💚'][Math.min(fed, 3) - 1];
+      nom.style.animation = 'none'; void nom.offsetWidth; nom.style.animation = '';
+      hearts(tx, ty, 4);
+      if (fed === 3) {
+        talking = true;
+        feed.disabled = true;
+        await wait(900);
+        treply.hidden = false;
+        treply.classList.add('turtle-talk');
+        const msg = `t h a n k   y o u ,   ${CONFIG.name.toLowerCase().split('').join(' ')}`;
+        for (let i = 1; i <= msg.length; i++) { treply.textContent = msg.slice(0, i); await wait(msg[i - 1] === ' ' ? 60 : 170); }
+        await wait(500);
+        treply.classList.remove('turtle-talk');
+        treply.textContent = `“Thank you, ${CONFIG.name}.” (He talks slowly. He’s been rehearsing that since Lampung.)`;
+        feed.textContent = 'Best friends forever 🐢💚';
+      }
+    });
+    $$('#choices .chip').forEach(b => b.addEventListener('click', async () => {
+      if (answered) return;
+      answered = true;
+      Sound.unlock();
+      b.classList.add('picked');
+      $('#choices').classList.add('done');
+      const r = $('#jealous-reply');
+      r.hidden = false;
+      if (b.dataset.j === 'yes') {
+        r.textContent = 'Good. That means you love me 😌 Don’t worry: my shoulder, my heart and my (terrible) squishy-finding skills all belong to you.';
+        Sound.peacock(1.45);
+      } else {
+        r.textContent = 'Correct. Nobody competes with you. Not even a very fluffy cockatoo. (He took it badly 🦜💔)';
+        Sound.nope();
+      }
+      buzz([20, 30, 20]);
+      await wait(900);
+      const hello = $('#hello');
+      hello.hidden = false;
+      finish(S);
+      await wait(300);
+      scrollTo($('.nav', S), 'end');
+    }));
+    return {};
+  })();
+
+  /* 7 · Level 40 */
   ctrl.level = (() => {
     const S = sceneEl('level');
     const ACH = [
@@ -738,12 +823,14 @@
       ['💕', 'Best Auntie Ever', 'Adored by Loolies & Mayoosh'],
       ['🧸', 'Squishy Diplomat', 'Runs an international squishy exchange'],
       ['🦚', 'Peacock Whisperer', 'Peacocks lined up on your porch to say hi'],
+      ['🐢', 'Turtle Feeder', 'Fed a giant turtle by hand. He’s still talking about it (slowly).'],
       ['🥩', 'Free Steak Legend', 'Sent back a well-done steak. Paid nothing. Repeatedly.'],
       ['🌶️', 'Spice Warrior', 'Took on laksa & satay. Bravely. Tearfully.'],
       ['🤠', 'Outlaw', 'Rode with Arthur Morgan'],
       ['🍳', 'Kitchen Chaos', 'Survived Overcooked (and your co-chefs)'],
       ['🛂', 'Head Bouncer', 'Said “Not Tonight” like a pro'],
       ['🌸', 'Scent Sommelier', 'Knows her Dior from her Chanel'],
+      ['🌷', 'Bouquet Boss', 'Peonies, roses & tulips. Pink or red only. White need not apply.'],
       ['🦴', 'Caveman Tamer', 'Made one caveman fall hopelessly in love'],
     ];
     $('#g-count').textContent = ACH.length;
@@ -788,7 +875,7 @@
     return {};
   })();
 
-  /* 7 · The 40+ Club */
+  /* 8 · The 40+ Club */
   ctrl.club = (() => {
     const S = sceneEl('club');
     const CLUB = [
@@ -828,7 +915,7 @@
     return {};
   })();
 
-  /* 8 · Count your blessings */
+  /* 9 · Count your blessings */
   ctrl.blessings = (() => {
     const S = sceneEl('blessings');
     const B = [
@@ -892,7 +979,7 @@
     return {};
   })();
 
-  /* 9 · Overcooked: build the cake, then blow out the candles */
+  /* 10 · Overcooked: build the cake, then blow out the candles */
   ctrl.cake = (() => {
     const S = $('#s-cake');
     const NS = 'http://www.w3.org/2000/svg';
@@ -925,8 +1012,9 @@
       for (let i = 0; i <= n; i++) {
         const t = Math.PI - (Math.PI * i) / n;
         const x = cx + rx * Math.cos(t), y = cy + ry * Math.sin(t);
-        svg('circle', { cx: f1(x), cy: f1(y), r: 6.4, fill: '#ff8fbd' }, ros);
-        svg('circle', { cx: f1(x - 1.8), cy: f1(y - 2), r: 2.2, fill: '#ffd6e6' }, ros);
+        const red = i % 2 === 1;
+        svg('circle', { cx: f1(x), cy: f1(y), r: 6.6, fill: red ? '#e0457a' : '#ff8fbd' }, ros);
+        svg('path', { d: `M${f1(x - 3.4)} ${f1(y + 0.6)}a3.5 3.5 0 1 1 3.5 3.1a2.3 2.3 0 1 1-2-2.3a1 1 0 1 1 1 1`, fill: 'none', stroke: red ? '#a3164a' : '#e2558f', 'stroke-width': 1.3, 'stroke-linecap': 'round' }, ros);
       }
     };
     rosettes(150, 262, 104, 15, 14);
@@ -1070,13 +1158,13 @@
     return { leave: stopMic };
   })();
 
-  /* 10 · The letter */
+  /* 11 · The letter */
   ctrl.letter = (() => {
     const S = sceneEl('letter');
     const ps = $$('#letter-body p');
     let io = null;
     function enter() {
-      Confetti.rain(34, 0.7);
+      Confetti.rain(36, 0.35, 0.5);
       if ('IntersectionObserver' in window) {
         if (io) io.disconnect();
         io = new IntersectionObserver(entries => entries.forEach(en => {
@@ -1085,6 +1173,17 @@
         ps.forEach(p => io.observe(p));
       } else ps.forEach(p => p.classList.add('in'));
     }
+    const bq = $('#bq');
+    bq.addEventListener('click', () => {
+      if (bq.classList.contains('open')) return;
+      Sound.unlock(); Sound.sparkle(); buzz([20, 40, 20]);
+      bq.classList.add('open');
+      bq.setAttribute('aria-label', 'Your flowers');
+      const [x, y] = centre(bq);
+      Confetti.burst({ x, y, n: 90, speed: 8, hearts: 0.15, petals: 0.75 });
+      setTimeout(() => { $('#bq-note').classList.add('on'); }, 700);
+    });
+
     const hug = $('#hug');
     let timer = 0, hugged = false;
     const start = () => {

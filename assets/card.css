@@ -773,3 +773,54 @@ body.music-on .ife-eq i, body.music-on .mini-eq i { animation: eq .8s ease-in-ou
 .music-btn .ico-note { display: none; width: 20px; height: 20px; fill: currentColor; }
 .music-btn[aria-pressed="false"] .mini-eq { display: none; }
 .music-btn[aria-pressed="false"] .ico-note { display: block; }
+
+/* AI-painted postcards (passport) */
+.pc-art { margin: 12px auto 16px; width: min(300px, 82vw); padding: 7px 7px 8px; border-radius: 4px; background: #fff; box-shadow: 0 10px 24px rgba(60, 30, 60, .2); transform: rotate(-1.5deg); }
+.pc-art img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 2px; background: #f1e6ee; }
+.pc-art figcaption { margin-top: 6px; text-align: center; font: 700 18px/1.1 var(--font-hand); color: #4b3a4d; }
+
+/* Paintings to keep (letter) */
+.gallery { width: 100%; margin-top: 12px; }
+.gallery .kicker { margin-bottom: 14px; }
+.art-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.art { position: relative; margin: 0; padding: 7px; border-radius: 3px; transform: rotate(var(--r, 0deg));
+  background: linear-gradient(135deg, #f7e2a8, #d6ab4a 45%, #f3d98b 70%, #c9982f);
+  box-shadow: 0 12px 26px rgba(90, 60, 30, .25); }
+.art img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 5px solid #fffaf0; border-radius: 1px; background: #f5ecef; }
+.art .save { position: absolute; right: 12px; bottom: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--rose-600); font: 800 12px/1 var(--font-body); text-decoration: none; box-shadow: 0 3px 10px rgba(0, 0, 0, .15); }
+
+/* A bouquet to unwrap (letter) */
+.bouquet { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 8px; }
+.bq { position: relative; width: min(300px, 80vw); padding: 0; border: 0; border-radius: 22px; overflow: hidden; cursor: pointer; background: #fbe3ec; box-shadow: 0 16px 34px rgba(150, 60, 110, .25); }
+.bq img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; filter: blur(12px) saturate(.85); transform: scale(1.1); transition: filter 1s ease, transform 1.2s ease; }
+.bq-wrap {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  background:
+    linear-gradient(90deg, transparent 45%, #f0438e 45%, #f0438e 55%, transparent 55%),
+    linear-gradient(0deg, transparent 45%, #f0438e 45%, #f0438e 55%, transparent 55%),
+    repeating-linear-gradient(45deg, rgba(255, 214, 230, .9) 0 14px, rgba(255, 196, 220, .9) 14px 28px);
+  transition: opacity .8s ease, transform 1s ease;
+}
+.bq-bow { font-size: 66px; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .2)); animation: bob 2.4s ease-in-out infinite; }
+.bq-tap { padding: 8px 14px; border-radius: 999px; background: #fff; color: var(--rose-600); font: 800 14px/1 var(--font-body); box-shadow: 0 4px 12px rgba(0, 0, 0, .12); }
+.bq.open { cursor: default; }
+.bq.open img { filter: none; transform: none; }
+.bq.open .bq-wrap { opacity: 0; transform: scale(1.35) rotate(8deg); pointer-events: none; }
+.bq-note { margin: 0; max-width: 30ch; text-align: center; font: 700 21px/1.3 var(--font-hand); color: var(--rose-600); }
+
+/* Lampung friends */
+.friend { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.friend .polaroid { width: min(230px, 62vw); }
+.friend-text h3 { margin: 0 0 4px; font: 600 23px/1.2 var(--font-serif); }
+.friend-text p { margin: 0 0 10px; font-size: 15.5px; line-height: 1.45; }
+.friend-text .q { margin: 4px 0 8px; font-weight: 800; color: var(--rose-600); }
+.btn.small { min-height: 44px; padding: 11px 20px; font-size: 15px; }
+.chip.big { padding: 11px 16px; font-size: 15px; }
+.choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.choices.done .chip:not(.picked) { opacity: .4; }
+.chip.picked { background: var(--pink-400); color: #fff; }
+.friend-reply { margin: 10px 0 0 !important; font: 700 20px/1.3 var(--font-hand) !important; color: var(--ink); animation: fadeUp .5s both; }
+.turtle-talk { letter-spacing: .12em; }
+.nom { position: absolute; left: 50%; top: 18%; margin: 0; padding: 8px 12px; border-radius: 16px; background: #fff; box-shadow: 0 6px 16px rgba(58, 33, 64, .2); font: 900 16px/1.2 var(--font-body); color: #2f7a4f; white-space: nowrap; transform: translateX(-50%) rotate(3deg); animation: popIn .35s cubic-bezier(.3, 1.6, .5, 1) both; }
+.fly-leaf { position: fixed; z-index: 45; font-size: 30px; pointer-events: none; }
+.polaroid.hello { width: 130px; align-self: flex-end; margin: -6px 6px 0 0; animation: popIn .5s both; }

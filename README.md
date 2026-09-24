@@ -8,15 +8,16 @@ An interactive birthday card, a first-class "flight" from 39 to 40, and the emai
 ## The stops on the flight
 
 1. **Boarding:** an envelope, her first-class boarding pass and a *Not Tonight*-style ID check
-2. **Seat 1A:** slide up the window shade (fluffy clouds), the captain's announcement, her own Suno song on the in-flight entertainment, a welcome spritz
+2. **Seat 1A:** slide up the window shade (fluffy clouds), the caveman captain's announcement (with a real voice clip), her own Suno song on the in-flight entertainment, a spritz of "Eau de Cookies" (pink peony, red rose)
 3. **Birthday menu:** satay and laksa (no chilli), a medium-well steak that arrives well done (so it's free) and a buttercream cake
-4. **Passport:** stamps for Bali, Hong Kong, London (Loolies & Mayoosh), Lampung and Jakarta
+4. **Passport:** stamps for Bali, Hong Kong, London (Loolies & Mayoosh), Lampung and Jakarta, with painted postcards
 5. **The peacock porch:** tap the white peacock… and solve the case of the missing squishies
-6. **Level 40 unlocked:** her achievements, game style
-7. **The 40+ Club:** people who did amazing things at 40 and after
-8. **Count your blessings:** tap the clouds, Alhamdulillah
-9. **Overcooked: Birthday Edition:** build the cake, then blow out the candles (into the mic, or by tapping)
-10. **The letter,** with a hug button and little memories
+6. **Lampung friends:** feed the turtle, and decide whether to be jealous of the cockatoo
+7. **Level 40 unlocked:** her achievements, game style
+8. **The 40+ Club:** people who did amazing things at 40 and after
+9. **Count your blessings:** tap the clouds, Alhamdulillah
+10. **Overcooked: Birthday Edition:** build the cake (with buttercream roses), then blow out the candles (into the mic, or by tapping)
+11. **The letter,** a bouquet to unwrap (peonies, red and pink roses, pink tulips, and no white flowers), a hug button, two paintings to keep and little memories
 
 ## Turn the website on (one time)
 
@@ -29,7 +30,8 @@ An interactive birthday card, a first-class "flight" from 39 to 40, and the emai
 
 - Preview a single stop by adding its name to the link, e.g. `…/Projbd/#peacocks`. The names are `seat`, `menu`, `passport`, `peacocks`, `level`, `club`, `blessings`, `cake` and `letter`.
 - The pet names and signature are set in `CONFIG` at the top of `assets/card.js`.
-- Sound effects are all synthesised in the browser. The only audio file is her song, `assets/music/cookies-original.mp3`.
+- Sound effects are all synthesised in the browser. The audio files are her song (`assets/music/cookies-original.mp3`) and the captain's voice (`assets/ai/captain.mp3`).
+- `assets/ai/` holds pieces made with Higgsfield: the captain's voice (Seed Audio), the painted postcards, the two paintings and the bouquet (Z-Image). None of them show people's faces.
 
 ## Privacy
 
