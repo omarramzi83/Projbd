@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#b9dcff">
+<meta name="robots" content="noindex, nofollow">
+<title>Flight BD40 · Boarding now</title>
+<meta name="description" content="A first-class birthday flight, from 39 to 40.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="✈️ Flight BD40 · Boarding now">
+<meta property="og:description" content="Your first-class boarding pass is ready, Cookies. Seat 1A, above the fluffiest clouds. 💗">
+<meta property="og:image" content="https://omarramzi83.github.io/Projbd/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Great+Vibes&family=Nunito:wght@400;600;700;800;900&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="assets/card.css">
+</head>
+<body data-scene="envelope">
+
+<!-- Shared SVG pieces: clouds, plane, ink texture -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="cl-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".58" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e4ecf8"/>
+    </linearGradient>
+    <symbol id="cloud-a" viewBox="0 0 220 120">
+      <g fill="url(#cl-grad)">
+        <rect x="28" y="84" width="170" height="32" rx="16"/>
+        <circle cx="30" cy="92" r="22"/>
+        <circle cx="186" cy="84" r="26"/>
+        <circle cx="58" cy="78" r="34"/>
+        <circle cx="150" cy="62" r="38"/>
+        <circle cx="102" cy="54" r="44"/>
+      </g>
+    </symbol>
+    <symbol id="cloud-b" viewBox="0 0 180 120">
+      <g fill="url(#cl-grad)">
+        <rect x="24" y="86" width="140" height="30" rx="15"/>
+        <circle cx="26" cy="96" r="20"/>
+        <circle cx="150" cy="92" r="22"/>
+        <circle cx="52" cy="80" r="32"/>
+        <circle cx="128" cy="70" r="34"/>
+        <circle cx="88" cy="50" r="40"/>
+      </g>
+    </symbol>
+    <symbol id="cloud-c" viewBox="0 0 140 80">
+      <g fill="url(#cl-grad)">
+        <rect x="18" y="48" width="104" height="28" rx="14"/>
+        <circle cx="40" cy="52" r="24"/>
+        <circle cx="104" cy="50" r="24"/>
+        <circle cx="72" cy="36" r="30"/>
+      </g>
+    </symbol>
+    <symbol id="plane" viewBox="0 0 24 24">
+      <path d="M12 2c1 0 1.6 1 1.6 2.2v5l7.9 4.4v2l-7.9-2.4v5.1L16 20v1.6l-4-1-4 1V20l2.4-1.7v-5.1l-7.9 2.4v-2l7.9-4.4v-5C10.4 3 11 2 12 2z"/>
+    </symbol>
+    <filter id="ink" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.4 0 0 0 2.15" result="speckle"/>
+      <feComposite in="rough" in2="speckle" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- Ambient sky -->
+<div id="sky" aria-hidden="true">
+  <div class="sun"></div>
+  <svg class="amb" style="--w:260px;--top:8%;--d:95s;--dl:-10s;--o:.95"><use href="#cloud-a"/></svg>
+  <svg class="amb" style="--w:180px;--top:24%;--d:120s;--dl:-70s;--o:.85"><use href="#cloud-b"/></svg>
+  <svg class="amb" style="--w:120px;--top:40%;--d:80s;--dl:-35s;--o:.8"><use href="#cloud-c"/></svg>
+  <svg class="amb" style="--w:320px;--top:58%;--d:140s;--dl:-100s;--o:.9"><use href="#cloud-a"/></svg>
+  <svg class="amb" style="--w:200px;--top:74%;--d:105s;--dl:-20s;--o:.85"><use href="#cloud-b"/></svg>
+  <svg class="amb" style="--w:150px;--top:88%;--d:90s;--dl:-60s;--o:.8"><use href="#cloud-c"/></svg>
+  <svg class="amb" style="--w:230px;--top:48%;--d:130s;--dl:-5s;--o:.7"><use href="#cloud-b"/></svg>
+</div>
+
+<!-- Flight progress + sound -->
+<header id="topbar">
+  <div class="fp" aria-hidden="true">
+    <span class="fp-code">39</span>
+    <div class="fp-track"><i class="fp-fill" id="fp-fill"></i><svg class="fp-plane" id="fp-plane"><use href="#plane"/></svg></div>
+    <span class="fp-code">40</span>
+  </div>
+  <button id="musicbtn" class="icon-btn music-btn" type="button" aria-label="Pause your song" aria-pressed="true" hidden>
+    <span class="mini-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    <svg class="ico-note" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5A2.5 2.5 0 1 1 6.5 15c.6 0 1.1.2 1.5.5V5l11-2v11.5A2.5 2.5 0 1 1 16.5 12c.6 0 1.1.2 1.5.5V6.2l-7 1.3v10z"/></svg>
+  </button>
+  <button id="mute" class="icon-btn" type="button" aria-label="Mute sound" aria-pressed="false">
+    <svg class="ico-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <svg class="ico-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+</header>
+
+<main id="app">
+
+  <!-- 1 · Envelope + boarding pass -->
+  <section class="scene active" data-key="envelope" id="s-envelope">
+    <div class="inner center">
+      <div class="env-wrap" id="env-wrap">
+        <div class="env-title">
+          <p class="kicker">Special delivery for</p>
+          <h1 class="script hero"><span class="nm">Cookies</span></h1>
+        </div>
+        <button class="envelope" id="envelope" type="button" aria-label="Open your envelope">
+          <span class="env-back"></span>
+          <span class="env-card"><span class="env-card-top">✦ Boarding pass</span><span class="env-card-sub">Flight BD40 · First class</span><span class="env-card-lines"></span></span>
+          <span class="env-pocket"></span>
+          <span class="env-flap"></span>
+          <span class="env-seal"><span>40</span></span>
+        </button>
+        <p class="hint">Tap to open 💌</p>
+      </div>
+
+      <div class="pass-wrap" id="pass-wrap" hidden>
+        <div class="bp-shadow"><article class="bpass" id="bpass" aria-label="Your boarding pass">
+          <header class="bp-head">
+            <span class="bp-air">✦ Caveman Air</span>
+            <span class="bp-class">First</span>
+          </header>
+          <div class="bp-route">
+            <div class="bp-end"><small>From</small><b>39</b><span>Thirty-nine</span></div>
+            <div class="bp-mid" aria-hidden="true"><i></i><svg><use href="#plane"/></svg><i></i></div>
+            <div class="bp-end right"><small>To</small><b>40</b><span>Fabulous forty</span></div>
+          </div>
+          <dl class="bp-grid">
+            <div><dt>Passenger</dt><dd class="up"><span class="nm">Cookies</span></dd></div>
+            <div><dt>Flight</dt><dd>BD 40</dd></div>
+            <div><dt>Seat</dt><dd>1A · Window</dd></div>
+            <div><dt>Gate</dt><dd>My heart</dd></div>
+            <div><dt>Boarding</dt><dd>Now</dd></div>
+            <div><dt>Date</dt><dd>Your day</dd></div>
+            <div class="wide"><dt>Status</dt><dd>Titanium Elite ✦ <em>Upgrade confirmed (obviously)</em></dd></div>
+          </dl>
+          <div class="bp-tear" aria-hidden="true"></div>
+          <footer class="bp-foot">
+            <div class="barcode" id="barcode" aria-hidden="true"></div>
+            <small>Operated by Caveman Air 🦴 · No manners required</small>
+          </footer>
+          <div class="bp-stamp" id="bp-stamp" aria-hidden="true">Approved<small>VIP · BD40</small></div>
+        </article></div>
+        <button class="btn" id="checkin" type="button">Check in 🛂</button>
+        <button class="btn" id="board" type="button" data-next hidden>Board the plane ✈</button>
+      </div>
+    </div>
+
+    <div class="sheet" id="idsheet" hidden>
+      <div class="sheet-card" role="dialog" aria-label="ID check">
+        <p class="kicker">🛂 ID check</p>
+        <h3 class="sheet-title">Bouncer on duty</h3>
+        <p class="sheet-sub">Strict <i>Not Tonight</i> rules apply. No exceptions.*</p>
+        <ul class="checks" id="checks">
+          <li data-ok="1"><span class="mark"></span><span><b>Name:</b> <span class="nm">Cookies</span></span></li>
+          <li data-ok="1"><span class="mark"></span><span><b>Also known as:</b> <span class="nm2">Nadoodies</span></span></li>
+          <li data-ok="1"><span class="mark"></span><span><b>Age:</b> 40 <i>(suspiciously gorgeous)</i></span></li>
+          <li data-ok="1"><span class="mark"></span><span><b>Status:</b> Titanium Elite ✦</span></li>
+          <li data-ok="0"><span class="mark"></span><span><b>Manners:</b> none detected <i>(elet adab, mafeesh akhla2 😏)</i></span></li>
+        </ul>
+        <p class="verdict" id="verdict">Normally, no manners means <b>“Not Tonight”</b>… but for you, the door is always open. 💗</p>
+        <button class="btn" id="letmein" type="button" hidden>Let me in 💅</button>
+        <p class="fine">*Exceptions made for the birthday girl.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Seat 1A -->
+  <section class="scene" data-key="seat">
+    <div class="inner">
+      <p class="kicker">Seat 1A · Window</p>
+      <h2 class="title">Welcome aboard</h2>
+      <div class="window" id="window">
+        <div class="win-glass">
+          <img class="win-view" src="assets/photos/window-clouds.jpg" alt="The view from seat 1A: the wing over big fluffy clouds" decoding="async">
+          <button class="win-shade" id="shade" type="button" aria-label="Slide the window shade up">
+            <span class="shade-ribs"></span>
+            <span class="shade-hint">Slide up ☝️</span>
+            <span class="shade-handle"></span>
+          </button>
+        </div>
+      </div>
+      <p class="caption reveal" id="win-cap">Your favourite view: big fluffy clouds, all the way down ☁️</p>
+
+      <div class="card captain reveal" id="captain">
+        <div class="cap-head">
+          <img class="avatar" src="assets/photos/caveman-avatar.jpg" alt="Your captain today" decoding="async">
+          <div class="cap-who"><b>Your captain</b><small>Caveman Air · BD40</small></div>
+          <button class="chip" id="hear" type="button" hidden>🔊 Hear it</button>
+        </div>
+        <p class="cap-text" id="cap-text" aria-live="polite"></p>
+      </div>
+
+      <div class="ife reveal" id="ife">
+        <div class="ife-top"><span class="ife-kicker">📺 In-flight entertainment</span><span class="ife-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+        <div class="ife-row">
+          <button class="ife-play" id="ife-play" type="button" aria-label="Play your song">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <div class="ife-info">
+            <b>Now playing: a <span class="nm">Cookies</span> original 🎧</b>
+            <small>Made by you, with Suno. Caveman Air radio only plays the best.</small>
+            <div class="ife-bar"><i id="ife-fill"></i></div>
+            <div class="ife-time"><span id="ife-cur">0:00</span><span id="ife-dur">2:17</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card spritz reveal" id="spritz">
+        <button class="bottle" id="bottle" type="button" aria-label="Spritz the perfume">
+          <svg class="bottle-svg" viewBox="0 0 120 170" aria-hidden="true">
+            <defs>
+              <linearGradient id="pf-glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffdce9"/><stop offset=".5" stop-color="#fff8fb"/><stop offset="1" stop-color="#ffcadf"/></linearGradient>
+              <linearGradient id="pf-liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc3db"/><stop offset="1" stop-color="#ff86b8"/></linearGradient>
+              <linearGradient id="pf-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fcebb0"/><stop offset=".5" stop-color="#d4a23c"/><stop offset="1" stop-color="#f6dc8e"/></linearGradient>
+            </defs>
+            <g class="pf-cap">
+              <path d="M42 20C42 6 78 6 78 20l2 22H40z" fill="url(#pf-gold)"/>
+              <rect x="46" y="42" width="28" height="9" rx="2" fill="#c89b43"/>
+            </g>
+            <path d="M24 60l20-8h32l20 8 8 38-8 52-36 12-36-12-8-52z" fill="url(#pf-glass)" stroke="#f1b3cb" stroke-width="1.5"/>
+            <path d="M27 102l-3 46 36 12 36-12-3-46c-12 6-54 6-66 0z" fill="url(#pf-liquid)" opacity=".9"/>
+            <path d="M44 52l16 46 16-46M16 98h88M60 98v64M24 60l36 38 36-38" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.2"/>
+            <rect x="37" y="114" width="46" height="22" rx="3" fill="#fff" opacity=".9"/>
+            <text x="60" y="128.5" font-size="8.5" font-weight="900" text-anchor="middle" fill="#c2185b" letter-spacing=".5">EAU DE 40</text>
+            <path d="M30 66l-4 30" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+          </svg>
+          <span class="mist" id="mist" aria-hidden="true"></span>
+        </button>
+        <div class="notes">
+          <p class="kicker">Welcome spritz</p>
+          <p class="notes-hint" id="notes-hint">Tap the bottle ✨</p>
+          <div class="notes-body" id="notes-body" hidden>
+            <h3>Eau de <span class="nm">Cookies</span></h3>
+            <p><b>Top notes:</b> sparkle &amp; sass</p>
+            <p><b>Heart notes:</b> kindness, laughter &amp; Loolies-and-Mayoosh</p>
+            <p><b>Base notes:</b> forty years of fabulous</p>
+            <p class="small">Better than Dior. Don’t tell Chanel 🤫</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Dinner is served ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 3 · First class menu -->
+  <section class="scene" data-key="menu">
+    <div class="inner">
+      <div class="menu">
+        <p class="menu-top">✦ First Class ✦</p>
+        <h2 class="menu-title">Birthday Menu</h2>
+        <p class="menu-sub">Flight BD40 · Seat 1A · <b>Tap a dish to order</b></p>
+        <div class="dishes">
+          <button class="dish" type="button" data-dish="satay">
+            <span class="course">To start</span>
+            <span class="dname">Chicken satay <span class="em">🍢</span></span>
+            <span class="ddesc">Extra peanut sauce. Chilli: absolutely none.</span>
+            <span class="order">Order</span>
+          </button>
+          <p class="reply" data-for="satay" hidden>Served. Zero chilli. You’re welcome 😌</p>
+
+          <button class="dish" type="button" data-dish="laksa">
+            <span class="course">Soup</span>
+            <span class="dname">Malaysian laksa <span class="em">🍜</span></span>
+            <span class="ddesc">Spice level: gentle. Very, very gentle.</span>
+            <span class="order">Order</span>
+          </button>
+          <p class="reply" data-for="laksa" hidden>Served with tissues anyway. We’ve seen you fight the real one 🥵</p>
+
+          <button class="dish" type="button" data-dish="steak">
+            <span class="course">Main</span>
+            <span class="dname">Steak, medium-well <span class="em">🥩</span></span>
+            <span class="ddesc">Texas Roadhouse style, cooked exactly how you asked… probably.</span>
+            <span class="order">Order</span>
+            <span class="dish-stamp" id="steak-stamp" aria-hidden="true"></span>
+          </button>
+          <p class="reply" data-for="steak" hidden></p>
+
+          <button class="dish" type="button" data-dish="dessert">
+            <span class="course">Dessert</span>
+            <span class="dname">Pink buttercream cake &amp; candy <span class="em">🍬</span></span>
+            <span class="ddesc">Prepared by the birthday girl herself.</span>
+            <span class="order">Order</span>
+          </button>
+          <p class="reply" data-for="dessert" hidden>Coming up… but <b>you’re</b> making it. See you in the galley 👩‍🍳</p>
+        </div>
+      </div>
+      <figure class="polaroid" style="--r:3deg">
+        <img src="assets/photos/her-steak.jpg" alt="You, meeting a very big plate of steak" loading="lazy" decoding="async">
+        <figcaption>Exhibit A: you, in love (with a steak)</figcaption>
+      </figure>
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Time to land somewhere ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 4 · Passport -->
+  <section class="scene" data-key="passport">
+    <div class="inner">
+      <p class="kicker">Passport control</p>
+      <h2 class="title">The sweet escapes</h2>
+      <p class="sub">Stamp the places that stole your heart ✈️</p>
+      <div class="passport">
+        <div class="pp-data">
+          <div class="pp-head"><span>Passport</span><span class="ar" lang="ar" dir="rtl">جواز سفر</span></div>
+          <div class="pp-body">
+            <div class="pp-photo"><img src="assets/photos/her-passport.jpg" alt="Passport photo" loading="lazy" decoding="async"><i class="holo"></i></div>
+            <dl class="pp-fields">
+              <div><dt>Name</dt><dd class="up"><span class="nm">Cookies</span></dd></div>
+              <div><dt>Alias</dt><dd class="up"><span class="nm2">Nadoodies</span></dd></div>
+              <div><dt>Nationality</dt><dd>Citizen of the world</dd></div>
+              <div><dt>Status</dt><dd>Titanium Elite ✦</dd></div>
+              <div><dt>Occupation</dt><dd>Professional upgrade magnet</dd></div>
+            </dl>
+          </div>
+          <p class="mrz" id="mrz" aria-hidden="true"></p>
+        </div>
+        <div class="pp-visa">
+          <p class="pp-visa-title">Visas · Entries · Tap to stamp</p>
+          <div class="stamps">
+            <button class="slot" type="button" data-place="bali" style="--stamp:#e0407f;--rot:-8deg"><span class="slot-label">Bali</span>
+              <svg class="stamp" viewBox="0 0 120 90" aria-hidden="true"><g filter="url(#ink)">
+                <rect x="4" y="4" width="112" height="82" rx="10" fill="none" stroke="currentColor" stroke-width="3.2"/>
+                <rect x="10" y="10" width="100" height="70" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+                <text x="60" y="44" text-anchor="middle" font-size="25" font-weight="900" fill="currentColor" letter-spacing="3">BALI</text>
+                <text x="60" y="60" text-anchor="middle" font-size="7" font-weight="800" fill="currentColor" letter-spacing=".7">DENPASAR · ARRIVED</text>
+                <g transform="translate(60 71)" fill="currentColor"><ellipse rx="2.6" ry="5.2" transform="rotate(0) translate(0 -4.5)"/><ellipse rx="2.6" ry="5.2" transform="rotate(72) translate(0 -4.5)"/><ellipse rx="2.6" ry="5.2" transform="rotate(144) translate(0 -4.5)"/><ellipse rx="2.6" ry="5.2" transform="rotate(216) translate(0 -4.5)"/><ellipse rx="2.6" ry="5.2" transform="rotate(288) translate(0 -4.5)"/></g>
+              </g></svg>
+            </button>
+            <button class="slot" type="button" data-place="hk" style="--stamp:#2b5fb0;--rot:7deg"><span class="slot-label">Hong Kong</span>
+              <svg class="stamp" viewBox="0 0 120 90" aria-hidden="true"><g filter="url(#ink)">
+                <circle cx="60" cy="45" r="41" fill="none" stroke="currentColor" stroke-width="3.2"/>
+                <circle cx="60" cy="45" r="34" fill="none" stroke="currentColor" stroke-width="1.3"/>
+                <path id="hk-arc" d="M34 46a26 26 0 0 1 52 0" fill="none"/>
+                <text font-size="8.6" font-weight="900" fill="currentColor" letter-spacing="1.6"><textPath href="#hk-arc" startOffset="50%" text-anchor="middle">HONG KONG</textPath></text>
+                <text x="60" y="60" text-anchor="middle" font-size="18" font-weight="900" fill="currentColor">香港</text>
+                <text x="60" y="72" text-anchor="middle" font-size="6.5" font-weight="800" fill="currentColor" letter-spacing="1.4">ARRIVED</text>
+              </g></svg>
+            </button>
+            <button class="slot" type="button" data-place="london" style="--stamp:#c2185b;--rot:-4deg"><span class="slot-label">London</span>
+              <svg class="stamp" viewBox="0 0 120 90" aria-hidden="true"><g filter="url(#ink)">
+                <rect x="4" y="10" width="112" height="70" rx="35" fill="none" stroke="currentColor" stroke-width="3.2"/>
+                <rect x="10" y="16" width="100" height="58" rx="29" fill="none" stroke="currentColor" stroke-width="1.3"/>
+                <text x="60" y="46" text-anchor="middle" font-size="20" font-weight="900" fill="currentColor" letter-spacing="2">LONDON</text>
+                <text x="60" y="61" text-anchor="middle" font-size="6.2" font-weight="800" fill="currentColor" letter-spacing=".3">LOOLIES &amp; MAYOOSH HQ</text>
+              </g></svg>
+            </button>
+            <button class="slot" type="button" data-place="lampung" style="--stamp:#0e8a86;--rot:6deg"><span class="slot-label">Lampung</span>
+              <svg class="stamp" viewBox="0 0 120 90" aria-hidden="true"><g filter="url(#ink)">
+                <polygon points="30,5 90,5 116,45 90,85 30,85 4,45" fill="none" stroke="currentColor" stroke-width="3.2"/>
+                <polygon points="33,11 87,11 109,45 87,79 33,79 11,45" fill="none" stroke="currentColor" stroke-width="1.3"/>
+                <text x="60" y="42" text-anchor="middle" font-size="14" font-weight="900" fill="currentColor" letter-spacing=".6">LAMPUNG</text>
+                <text x="60" y="54" text-anchor="middle" font-size="5.9" font-weight="800" fill="currentColor" letter-spacing=".4">PEACOCKS · VOLCANO</text>
+                <text x="60" y="65" text-anchor="middle" font-size="6.2" font-weight="800" fill="currentColor" letter-spacing=".6">SURVIVED ✓</text>
+              </g></svg>
+            </button>
+            <button class="slot" type="button" data-place="jakarta" style="--stamp:#6a3fb5;--rot:-6deg"><span class="slot-label">Jakarta</span>
+              <svg class="stamp" viewBox="0 0 120 90" aria-hidden="true"><g filter="url(#ink)">
+                <rect x="4" y="7" width="112" height="76" rx="4" fill="none" stroke="currentColor" stroke-width="3.2"/>
+                <rect x="9" y="12" width="102" height="66" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/>
+                <text x="60" y="36" text-anchor="middle" font-size="18" font-weight="900" fill="currentColor" letter-spacing="2">JAKARTA</text>
+                <polyline points="14,52 32,52 37,42 43,63 49,38 55,66 61,46 67,57 73,50 106,50" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <text x="60" y="73" text-anchor="middle" font-size="7" font-weight="800" fill="currentColor" letter-spacing="1.2">STILL STANDING</text>
+              </g></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+            <p class="pp-done" id="pp-done" hidden>5 stamps down, a whole world to go ✈️</p>
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Next stop: Lampung ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+    <div class="sheet" id="pc-sheet" hidden>
+      <div class="sheet-card postcard" id="postcard" role="dialog" aria-label="Postcard"></div>
+    </div>
+  </section>
+
+  <!-- 5 · Peacock porch + the squishy case -->
+  <section class="scene" data-key="peacocks">
+    <div class="inner">
+      <p class="kicker">Lampung · our suite</p>
+      <h2 class="title">The peacock porch</h2>
+      <p class="sub" id="pk-sub">Remember our little visitors? Tap the peacock 🦚</p>
+      <div class="porch" id="porch" role="button" tabindex="0" aria-label="Tap the white peacock">
+        <svg class="porch-svg" viewBox="0 0 400 400" aria-hidden="true">
+          <defs>
+            <linearGradient id="pk-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe1ff"/><stop offset="1" stop-color="#ffe4ef"/></linearGradient>
+            <linearGradient id="pk-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a6e0ec"/><stop offset="1" stop-color="#6cbfd7"/></linearGradient>
+            <linearGradient id="pk-deck" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b98059"/><stop offset="1" stop-color="#8c583a"/></linearGradient>
+            <radialGradient id="pk-body" cx=".38" cy=".32" r=".85"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e8e2d9"/></radialGradient>
+          </defs>
+          <rect width="400" height="214" fill="url(#pk-sky)"/>
+          <use href="#cloud-c" x="44" y="38" width="112" height="64"/>
+          <use href="#cloud-a" x="246" y="66" width="124" height="68"/>
+          <path d="M0 208c38-18 68-17 94-3 22-15 52-14 78 3z" fill="#98bfc8"/>
+          <path d="M238 208c26-26 72-28 104-10 18-7 40-5 58 2v8z" fill="#86b2bd"/>
+          <rect y="206" width="400" height="60" fill="url(#pk-sea)"/>
+          <path d="M34 226h42M124 240h58M246 230h48M318 248h40" stroke="#fff" stroke-opacity=".65" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M0 268c24-22 52-12 70-26 20 12 44 6 64 26zM270 268c20-20 46-18 62-28 18 10 44 8 68 20v8z" fill="#77c192"/>
+          <rect y="256" width="400" height="46" fill="#ffffff" opacity=".22"/>
+          <rect y="252" width="400" height="7" fill="#8a5a3b"/>
+          <rect y="298" width="400" height="104" fill="url(#pk-deck)"/>
+          <g stroke="#6f4128" stroke-opacity=".45" stroke-width="1.6">
+            <path d="M0 318h400M0 342h400M0 370h400"/>
+            <path d="M60 298l-30 104M140 298l-18 104M220 298l-4 104M300 298l12 104M372 298l30 104" stroke-opacity=".25"/>
+          </g>
+          <g fill="#b98457" stroke="#8a5a3b" stroke-width="1.5">
+            <rect x="300" y="262" width="34" height="7" rx="2"/><path d="M304 269l-4 44M330 269l4 44M306 294h22" fill="none" stroke-width="3"/>
+            <rect x="346" y="262" width="34" height="7" rx="2"/><path d="M350 269l-4 44M376 269l4 44M352 294h22" fill="none" stroke-width="3"/>
+          </g>
+          <rect width="400" height="18" fill="#8a5a3b"/>
+          <rect y="16" width="400" height="5" fill="#6f4128" opacity=".5"/>
+          <rect width="14" height="400" fill="#7a4d31"/>
+          <rect x="386" width="14" height="400" fill="#7a4d31"/>
+
+          <!-- the porch squad (appear on the third tap) -->
+          <g transform="translate(78 330)"><g class="hen hen1">
+            <path d="M-26-10c-22 4-36 14-46 26l32-10z" fill="#2f6b4f"/>
+            <ellipse cx="-8" cy="-22" rx="20" ry="15" fill="#3d5f8e"/>
+            <path d="M2-32c4-12 4-22 8-30l6 2c-4 10-4 20-6 32z" fill="#1f5fae"/>
+            <circle cx="13" cy="-62" r="6.5" fill="#1f5fae"/>
+            <path d="M19-63l7 2-7 2z" fill="#c9a77c"/>
+            <circle cx="14.5" cy="-64" r="1.4" fill="#fff"/>
+            <path d="M11-68l-3-8M13.5-69v-9M16-68l3-8" stroke="#1f5fae" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M-12-8v10M-2-8v10" stroke="#b08d6a" stroke-width="2.2"/>
+          </g></g>
+          <g transform="translate(130 350) scale(.88)"><g class="hen hen2">
+            <path d="M-26-10c-22 4-36 14-46 26l32-10z" fill="#2f6b4f"/>
+            <ellipse cx="-8" cy="-22" rx="20" ry="15" fill="#3d5f8e"/>
+            <path d="M2-32c4-12 4-22 8-30l6 2c-4 10-4 20-6 32z" fill="#1f5fae"/>
+            <circle cx="13" cy="-62" r="6.5" fill="#1f5fae"/>
+            <path d="M19-63l7 2-7 2z" fill="#c9a77c"/>
+            <circle cx="14.5" cy="-64" r="1.4" fill="#fff"/>
+            <path d="M11-68l-3-8M13.5-69v-9M16-68l3-8" stroke="#1f5fae" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M-12-8v10M-2-8v10" stroke="#b08d6a" stroke-width="2.2"/>
+          </g></g>
+          <g transform="translate(352 356) scale(-.9 .9)"><g class="hen hen3">
+            <path d="M-26-10c-22 4-36 14-46 26l32-10z" fill="#2f6b4f"/>
+            <ellipse cx="-8" cy="-22" rx="20" ry="15" fill="#3d5f8e"/>
+            <path d="M2-32c4-12 4-22 8-30l6 2c-4 10-4 20-6 32z" fill="#1f5fae"/>
+            <circle cx="13" cy="-62" r="6.5" fill="#1f5fae"/>
+            <path d="M19-63l7 2-7 2z" fill="#c9a77c"/>
+            <circle cx="14.5" cy="-64" r="1.4" fill="#fff"/>
+            <path d="M11-68l-3-8M13.5-69v-9M16-68l3-8" stroke="#1f5fae" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M-12-8v10M-2-8v10" stroke="#b08d6a" stroke-width="2.2"/>
+          </g></g>
+
+          <!-- the white peacock -->
+          <g class="pk" id="pk">
+            <g class="tail" id="pk-tail"></g>
+            <g class="pk-bird">
+              <path d="M205 318l-4 28M219 318l3 28M201 346l-8 3M201 346l2 5M222 346l8 3M222 346l-2 5" stroke="#d6b692" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+              <ellipse cx="212" cy="290" rx="31" ry="40" transform="rotate(-18 212 290)" fill="url(#pk-body)" stroke="#d9d1c6" stroke-width="1.2"/>
+              <path d="M198 264c26-4 44 22 40 54-14-4-30-16-38-32z" fill="#f5f2ec" stroke="#d9d1c6" stroke-width="1.2"/>
+              <path d="M210 280c6 4 12 10 16 18M214 294c5 3 10 8 13 14" stroke="#e2dbd1" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <path d="M193 264c-6-22-14-40-12-56 4-10 14-10 16 0 1 16 8 34 16 50z" fill="url(#pk-body)" stroke="#d9d1c6" stroke-width="1.2"/>
+              <g class="pk-head">
+                <path d="M190 188l-11-19M192 187l-5-22M194 187l1-22M196 188l6-20M197 190l10-16" stroke="#e3dcd2" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="179" cy="169" r="3.2" fill="#fff" stroke="#d9d1c6"/>
+                <circle cx="187" cy="165" r="3.2" fill="#fff" stroke="#d9d1c6"/>
+                <circle cx="195" cy="165" r="3.2" fill="#fff" stroke="#d9d1c6"/>
+                <circle cx="202" cy="168" r="3.2" fill="#fff" stroke="#d9d1c6"/>
+                <circle cx="207" cy="174" r="3.2" fill="#fff" stroke="#d9d1c6"/>
+                <circle cx="189" cy="199" r="12" fill="#fff" stroke="#d9d1c6" stroke-width="1.2"/>
+                <path d="M178 197l-12 4 12 3z" fill="#e6c49a"/>
+                <circle cx="185" cy="195.5" r="2.3" fill="#2d2a33"/>
+                <circle cx="185.8" cy="194.7" r=".8" fill="#fff"/>
+                <ellipse cx="192" cy="204" rx="4.2" ry="2.5" fill="#ffadc9" opacity=".75"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- the missing squishy -->
+          <g class="pk-squishy" id="pk-squishy">
+            <g transform="translate(300 330)">
+              <ellipse cx="0" cy="12" rx="17" ry="3" fill="#000" opacity=".15"/>
+              <path d="M0-14c9-7 23 0 23 16 0 14-10 22-23 22S-23 16-23 2c0-16 14-23 23-16z" fill="#ff9fc2"/>
+              <path d="M0-14c3-7 10-9 13-6-4 4-8 6-13 6z" fill="#7cc98f"/>
+              <circle cx="-7" cy="3" r="2" fill="#3a2140"/><circle cx="7" cy="3" r="2" fill="#3a2140"/>
+              <path d="M-3 8q1.5 2 3 0 1.5 2 3 0" stroke="#3a2140" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
+        <p class="bubble" id="pk-bubble" hidden></p>
+        <p class="bubble mini m1" hidden>Cahhh!</p>
+        <p class="bubble mini m2" hidden>Cahhh!</p>
+        <p class="bubble mini m3" hidden>Cahhh!</p>
+      </div>
+
+      <div class="pk-photos">
+        <figure class="polaroid" style="--r:-4deg"><img src="assets/photos/peacock-porch.jpg" alt="Peafowl visiting our suite's porch in Lampung" loading="lazy" decoding="async"><figcaption>our porch squad</figcaption></figure>
+        <figure class="polaroid" style="--r:3deg"><img src="assets/photos/peacock-white.jpg" alt="A white peacock" loading="lazy" decoding="async"><figcaption>the white one 🤍</figcaption></figure>
+      </div>
+
+      <div class="casefile" id="casefile" hidden>
+        <div class="cf-tab">Case file #40</div>
+        <div class="cf-body">
+          <span class="cf-stamp">Solved</span>
+          <h3>The Missing Squishies of Lampung</h3>
+          <div class="cf-row">
+            <figure class="polaroid mini" style="--r:-3deg"><img src="assets/photos/caveman-hornbills.jpg" alt="Suspect number one: your caveman, with two hornbills" loading="lazy" decoding="async"><figcaption>suspect #1</figcaption></figure>
+            <dl class="cf-facts">
+              <dt>Suspect</dt><dd>Your caveman</dd>
+              <dt>Known associates</dt><dd>Two hornbills 👀</dd>
+              <dt>Alibi</dt><dd>“I genuinely never saw them.”</dd>
+            </dl>
+          </div>
+          <p><b>Evidence:</b> peacocks on our porch. Every. Single. Day.</p>
+          <p class="cf-verdict"><b>Verdict:</b> the peacocks did it 🦚 Caveman: innocent (mostly).</p>
+          <div class="squishy-zone">
+            <button class="squishy" id="squishy" type="button" aria-label="Squeeze the squishy">
+              <svg viewBox="0 0 140 130" aria-hidden="true">
+                <defs><radialGradient id="sq-g" cx=".38" cy=".32" r=".78"><stop offset="0" stop-color="#ffe3ee"/><stop offset=".6" stop-color="#ffb3cd"/><stop offset="1" stop-color="#ff8db5"/></radialGradient></defs>
+                <ellipse cx="70" cy="123" rx="44" ry="6" fill="#3a2140" opacity=".12"/>
+                <path d="M70 24c22-18 58-2 58 38 0 36-26 58-58 58S12 98 12 62c0-40 36-56 58-38z" fill="url(#sq-g)"/>
+                <path d="M70 24c-4 16-4 28 0 40" stroke="#ff8db5" stroke-width="2" fill="none" opacity=".55"/>
+                <path d="M70 24c8-18 26-22 34-14-10 10-22 14-34 14z" fill="#7cc98f"/>
+                <ellipse cx="50" cy="74" rx="5" ry="6.5" fill="#3a2140"/><circle cx="51.8" cy="71.5" r="1.8" fill="#fff"/>
+                <ellipse cx="90" cy="74" rx="5" ry="6.5" fill="#3a2140"/><circle cx="91.8" cy="71.5" r="1.8" fill="#fff"/>
+                <ellipse cx="38" cy="86" rx="8" ry="4.5" fill="#ff6fa3" opacity=".45"/><ellipse cx="102" cy="86" rx="8" ry="4.5" fill="#ff6fa3" opacity=".45"/>
+                <path d="M63 84q3.5 4 7 0 3.5 4 7 0" stroke="#3a2140" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <p class="sq-hint" id="sq-hint">Squishy recovered! Squeeze it 💗</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Case closed ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 6 · Level 40 -->
+  <section class="scene" data-key="level">
+    <div class="inner">
+      <div class="thought" id="thought">
+        <p>“Forty?! I haven’t done enough…” <span aria-hidden="true">😔</span></p>
+      </div>
+      <p class="sub strong">Oh really? Let’s check your save file.</p>
+      <button class="btn gamebtn" id="loadsave" type="button">▶ Load save file</button>
+      <div class="game" id="game" hidden>
+        <div class="g-head"><span>SAVE 01</span><span>PLAYER: <b class="up"><span class="nm2">Nadoodies</span></b></span></div>
+        <div class="g-xp"><span id="g-lv">LV 39</span><div class="g-bar"><i id="g-fill"></i></div><span>LV 40</span></div>
+        <p class="g-levelup" id="g-levelup" hidden>LEVEL 40<br>UNLOCKED!</p>
+        <ul class="g-ach" id="g-ach"></ul>
+        <div class="g-foot" id="g-foot" hidden>
+          <div><b id="g-count">17</b><span>achievements</span></div>
+          <div><b>40%</b><span>complete</span></div>
+          <div><b class="inf">∞</b><span>chapters left</span></div>
+        </div>
+        <p class="g-note" id="g-note" hidden>The best missions are still ahead. (And GTA VI is almost here 👀)</p>
+      </div>
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Meet the 40+ Club ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 7 · The 40+ Club -->
+  <section class="scene" data-key="club">
+    <div class="inner">
+      <p class="kicker">Late bloomers, legends &amp; you</p>
+      <h2 class="title">The 40+ Club</h2>
+      <p class="sub">Think forty is late? These legends were only getting started. Tap to flip.</p>
+      <div class="flips" id="flips"></div>
+      <p class="arthur reveal" id="arthur">And as Arthur would say…<b>“You’re alright, girl.”</b><small>— Arthur Morgan (and me)</small></p>
+      <div class="nav"><button class="btn next" type="button" data-next hidden>Count your blessings ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 8 · Blessings -->
+  <section class="scene" data-key="blessings">
+    <div class="inner">
+      <p class="kicker">Alhamdulillah</p>
+      <h2 class="title">Count your blessings</h2>
+      <p class="sub">Every cloud up here is a blessing. Tap them all ☁️</p>
+      <p class="count" id="bl-count">0 / 9</p>
+      <div class="blsky" id="blsky"></div>
+      <div class="bl-final" id="bl-final" hidden>
+        <p class="arabic" lang="ar" dir="rtl">الحمد لله</p>
+        <p class="bl-final-en">Alhamdulillah, for everything. And especially for you.</p>
+        <p class="sub">Forty isn’t “not enough”. It’s forty years of blessings, with so many more to come, insha’Allah.</p>
+      </div>
+      <div class="bl-list card" id="bl-list" hidden><p class="kicker">Alhamdulillah for…</p><ul id="bl-ul"></ul></div>
+      <div class="nav"><button class="btn next" type="button" data-next hidden>To the galley ›</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- 9 · Cake -->
+  <section class="scene" data-key="cake" id="s-cake">
+    <div class="inner">
+      <div class="oc-head"><span class="oc-logo">Overcooked</span><span class="oc-ed">Birthday Edition</span></div>
+      <div class="ticket" id="ticket">
+        <div class="t-row"><b>ORDER #40</b><span>Seat 1A</span></div>
+        <p>Pink buttercream cake + all the candy</p>
+        <div class="t-timer"><i></i></div>
+      </div>
+      <div class="counter" id="counter">
+        <div class="glow" aria-hidden="true"></div>
+        <svg class="cake" id="cake-art" viewBox="0 0 300 300" aria-label="Your birthday cake" role="img">
+          <defs>
+            <linearGradient id="ck-sponge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9bf85"/><stop offset=".5" stop-color="#f6d7a4"/><stop offset="1" stop-color="#e2b577"/></linearGradient>
+            <linearGradient id="ck-cream" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9cc3"/><stop offset=".45" stop-color="#ffc4dc"/><stop offset="1" stop-color="#ff94be"/></linearGradient>
+            <radialGradient id="ck-flame" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#fffbe0"/><stop offset=".45" stop-color="#ffd35c"/><stop offset="1" stop-color="#ff8a3d"/></radialGradient>
+          </defs>
+          <ellipse cx="150" cy="270" rx="128" ry="19" fill="#ffffff"/>
+          <ellipse cx="150" cy="268" rx="112" ry="14" fill="#f3eef3"/>
+          <g class="ck-layer" id="ck-sponge-l">
+            <path d="M48 180v82a102 14 0 0 0 204 0v-82z" fill="url(#ck-sponge)"/>
+            <path d="M48 222a102 14 0 0 0 204 0" stroke="#fff4dc" stroke-width="7" fill="none"/>
+            <ellipse cx="150" cy="180" rx="102" ry="14" fill="#f9e1b6"/>
+            <path d="M84 120v60a66 10 0 0 0 132 0v-60z" fill="url(#ck-sponge)"/>
+            <path d="M84 150a66 10 0 0 0 132 0" stroke="#fff4dc" stroke-width="6" fill="none"/>
+            <ellipse cx="150" cy="120" rx="66" ry="10" fill="#f9e1b6"/>
+          </g>
+          <g class="ck-layer" id="ck-cream-l">
+            <path d="M46 178v84a104 15 0 0 0 208 0v-84z" fill="url(#ck-cream)"/>
+            <ellipse cx="150" cy="178" rx="104" ry="15" fill="#ffd3e5"/>
+            <path id="ck-drip1" fill="#ffd3e5"/>
+            <path d="M82 118v62a68 11 0 0 0 136 0v-62z" fill="url(#ck-cream)"/>
+            <ellipse cx="150" cy="118" rx="68" ry="11" fill="#ffd3e5"/>
+            <path id="ck-drip2" fill="#ffd3e5"/>
+            <g id="ck-rosettes"></g>
+          </g>
+          <g class="ck-layer" id="ck-candy-l"></g>
+          <g class="ck-layer" id="ck-candle-l">
+            <g class="cd cd4">
+              <path d="M134 78l-16 26h24M136 76v40" stroke="#ff6fab" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M134 78l-16 26h24M136 76v40" stroke="#fff" stroke-width="3" stroke-dasharray="4 6" stroke-linecap="round" fill="none"/>
+              <path d="M136 72v-8" stroke="#5b4a3a" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <g class="cd cd0">
+              <ellipse cx="170" cy="96" rx="12" ry="18" stroke="#ff6fab" stroke-width="10" fill="none"/>
+              <ellipse cx="170" cy="96" rx="12" ry="18" stroke="#fff" stroke-width="3" stroke-dasharray="4 6" fill="none"/>
+              <path d="M170 74v-8" stroke="#5b4a3a" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <g class="flame f1"><g class="fl"><path d="M136 64c-7-8-4-17 0-24 4 7 7 16 0 24z" fill="url(#ck-flame)"/><path d="M136 62c-3-4-2-8 0-12 2 4 3 8 0 12z" fill="#fffbe6"/></g></g>
+            <g class="flame f2"><g class="fl"><path d="M170 66c-7-8-4-17 0-24 4 7 7 16 0 24z" fill="url(#ck-flame)"/><path d="M170 64c-3-4-2-8 0-12 2 4 3 8 0 12z" fill="#fffbe6"/></g></g>
+            <path class="smoke s1" d="M136 60c-6-8 6-14 0-22s6-14 0-22" stroke="#c9c2cc" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <path class="smoke s2" d="M170 62c-6-8 6-14 0-22s6-14 0-22" stroke="#c9c2cc" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <p class="pow" id="pow" aria-hidden="true"></p>
+      </div>
+      <div class="stations" id="stations">
+        <button class="st ready" type="button" data-step="0"><span aria-hidden="true">🧁</span>Sponge</button>
+        <button class="st" type="button" data-step="1" disabled><span aria-hidden="true">🎀</span>Buttercream</button>
+        <button class="st" type="button" data-step="2" disabled><span aria-hidden="true">🍬</span>Candy</button>
+        <button class="st" type="button" data-step="3" disabled><span aria-hidden="true">🕯️</span>Candles</button>
+      </div>
+      <div class="orderup" id="orderup" hidden><b>ORDER UP!</b><span class="stars"><i>★</i><i>★</i><i>★</i></span></div>
+      <div class="blow" id="blow" hidden>
+        <p class="blow-title">Make a wish, <span class="nm2">Nadoodies</span>… then blow 🌬️</p>
+        <button class="btn" id="mic" type="button">🎤 Blow into your phone</button>
+        <p class="blow-or" id="blow-or">or just tap the flames</p>
+        <div class="meter" id="meter-wrap" hidden><i id="meter"></i></div>
+      </div>
+      <div class="hb" id="hb" hidden>
+        <p class="script hb-title">Happy 40th Birthday!</p>
+        <p class="sub">Your wish is on its way ✨</p>
+      </div>
+      <div class="nav"><button class="btn next" type="button" data-next hidden>One last thing… 💌</button><button class="skip" type="button" data-next>skip ›</button></div>
+    </div>
+    <div class="dimmer" id="dimmer" aria-hidden="true"></div>
+  </section>
+
+  <!-- 10 · The letter -->
+  <section class="scene" data-key="letter">
+    <div class="inner">
+      <p class="script letter-hero">Happy 40th Birthday</p>
+      <p class="letter-name"><span class="nm">Cookies</span></p>
+      <figure class="polaroid big" style="--r:-2deg">
+        <img src="assets/photos/us-plane.jpg" alt="Us, cosy on a plane" loading="lazy" decoding="async">
+        <figcaption>us, somewhere above the clouds ☁️</figcaption>
+      </figure>
+      <article class="letter" id="letter-body">
+        <p class="salute">My <span class="nm">Cookies</span>, my <span class="nm2">Nadoodies</span>,</p>
+        <p>Happy 40th birthday! I know forty doesn’t feel the way you thought it would, and that sometimes you feel you haven’t done enough. So let me remind you: you’ve travelled the world, you’ve made two little girls in London believe their auntie is the coolest person alive, you’ve created a music genre all your own, and you survived a volcano and an earthquake (with me!). Nothing can keep us down.</p>
+        <p>We’re alive, we’re together, and every single day with you is a blessing. Alhamdulillah for your laugh, your kindness, your sass, and even for the way you turn my voice into a caveman’s. You have no manners (elet adab, mafeesh akhla2 😂), and I wouldn’t change a single thing about you.</p>
+        <p>I wish so much that I was there with you today, to hold your hand, to watch you blow out your candles, and to watch you send back a well-done steak. Until I can, I hope this little flight made you smile. Think of it as a hug from far away. The real one is coming the moment I see you.</p>
+        <p>Here’s to forty, and to all the adventures still waiting for us. (And for the record: I still don’t remember seeing those squishies.)</p>
+        <p class="closing">I love you, always.</p>
+        <p class="sig">— <span class="sign">Your caveman</span> 🦴</p>
+      </article>
+
+      <button class="hug" id="hug" type="button"><span class="hug-fill" aria-hidden="true"></span><span class="hug-label">Hold for a hug from me 🤗</span></button>
+      <p class="hug-msg" id="hug-msg" hidden>Consider yourself squeezed 🤗 The real one is coming the moment I see you.</p>
+
+      <div class="reel">
+        <p class="kicker">Little memories</p>
+        <div class="reel-track">
+          <figure class="polaroid" style="--r:-3deg"><img src="assets/photos/peacock-blue.jpg" alt="A peacock showing off" loading="lazy" decoding="async"><figcaption>showing off 🦚</figcaption></figure>
+          <figure class="polaroid" style="--r:2deg"><img src="assets/photos/sky-clouds.jpg" alt="A sky full of fluffy clouds" loading="lazy" decoding="async"><figcaption>your kind of sky ☁️</figcaption></figure>
+          <figure class="polaroid" style="--r:-2deg"><img src="assets/photos/her-portrait.jpg" alt="You, smiling" loading="lazy" decoding="async"><figcaption>that smile</figcaption></figure>
+          <figure class="polaroid" style="--r:3deg"><img src="assets/photos/perfume.jpg" alt="Two beautiful perfume bottles" loading="lazy" decoding="async"><figcaption>smells like you ✨</figcaption></figure>
+          <figure class="polaroid" style="--r:-3deg"><img src="assets/photos/lampung-pool.jpg" alt="The infinity pool in Lampung at night" loading="lazy" decoding="async"><figcaption>Lampung nights 🌙</figcaption></figure>
+          <figure class="polaroid" style="--r:2deg"><img src="assets/photos/caveman-beach.jpg" alt="Your caveman on the beach" loading="lazy" decoding="async"><figcaption>your caveman, off duty 🕶️</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="end-actions">
+        <button class="btn ghost" id="track-letter" type="button">🎧 Play your song</button>
+        <a class="btn ghost" href="https://www.youtube.com/results?search_query=Edge+of+Desire" target="_blank" rel="noopener">🎵 “Edge of Desire”</a>
+        <button class="btn" id="replay" type="button">↺ Fly again</button>
+      </div>
+      <p class="footer-note">Made with love (and zero manners) for your 40th<br>Caveman Air · Flight BD40</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Fly-through-the-clouds transition -->
+<div id="wipe" aria-hidden="true">
+  <div class="veil"></div>
+  <svg class="wc" style="--x:-8%;--y:-6%;--w:78%"><use href="#cloud-a"/></svg>
+  <svg class="wc" style="--x:36%;--y:4%;--w:80%"><use href="#cloud-b"/></svg>
+  <svg class="wc" style="--x:-14%;--y:26%;--w:90%"><use href="#cloud-b"/></svg>
+  <svg class="wc" style="--x:30%;--y:34%;--w:86%"><use href="#cloud-a"/></svg>
+  <svg class="wc" style="--x:-6%;--y:58%;--w:84%"><use href="#cloud-a"/></svg>
+  <svg class="wc" style="--x:40%;--y:66%;--w:76%"><use href="#cloud-b"/></svg>
+  <svg class="wc" style="--x:4%;--y:82%;--w:92%"><use href="#cloud-a"/></svg>
+</div>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+<audio id="track" src="assets/music/cookies-original.mp3" preload="none" loop></audio>
+
+<script src="assets/card.js"></script>
+</body>
+</html>
