@@ -57,6 +57,7 @@ A streaming-app birthday card for Bobz: https://omarramzi83.github.io/Projbd/bob
 9. **E7 The Good, the Bad & the Back Pain:** a quick-draw duel, and the back massager reveal
 10. **E8 Make 78 Great Again:** cheer the rally, then the family WhatsApp group
 11. **The Birthday Special:** blow out the 78 candles, the letter, a throwback and the end credits
+12. **Bobz's Jukebox** (the 🎸 button, or the home screen): Santana's greatest solos, played from YouTube (Santana's official uploads where they exist)
 
 - Preview a single episode by adding its name to the link, e.g. `…/bobz/#western`. The names are `home`, `coffee`, `doctor`, `masri`, `villa`, `tafee`, `scam`, `western`, `rally` and `special`.
 - The sender's name is set in `CONFIG` at the top of `bobz/bobz.js`.

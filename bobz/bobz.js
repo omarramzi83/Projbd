@@ -290,6 +290,18 @@
     { key: 'special', n: 9, special: true, title: 'The Birthday Special', emoji: '🎂', mins: '5m', syn: 'Candles, a letter, a throwback and the credits.', bg: 'linear-gradient(135deg,#f2c14e,#7a4a0e)' },
   ];
   const EP_KEYS = EPISODES.map(e => e.key);
+
+  // Bobz's Jukebox: Santana on YouTube (official uploads where Santana has one)
+  const SONGS = [
+    { code: 'A1', title: 'Samba Pa Ti', year: 1970, yt: 'j5AUm_xaE9A', note: 'The solo that makes grown men close their eyes', sl: 'linear-gradient(135deg,#ff9a3c,#c8102e)' },
+    { code: 'A2', title: 'Europa', year: 1976, yt: 'Ot6pSrKT1oc', note: 'Pure guitar. No words needed', sl: 'linear-gradient(135deg,#3da9ff,#1d2a6b)' },
+    { code: 'A3', title: 'Black Magic Woman', year: 1970, yt: '9wT1s96JIb0', note: 'A 1970 classic', sl: 'linear-gradient(135deg,#b86bff,#2b0f3a)' },
+    { code: 'A4', title: 'Oye Como Va', year: 1970, yt: 'J7ATTjg7tpE', note: 'Impossible not to dance', sl: 'linear-gradient(135deg,#ffd23f,#ff3d68)' },
+    { code: 'B1', title: 'Soul Sacrifice', year: 1969, yt: 'JaaT_HRb4GU', note: 'Live at Woodstock. Legendary', sl: 'linear-gradient(135deg,#3ddc97,#0f5132)' },
+    { code: 'B2', title: 'Europa (Live)', year: 2011, yt: 'SgciQ2FF-RM', note: 'Montreux. Eight minutes of solo', sl: 'linear-gradient(135deg,#00c6ff,#6a00f4)' },
+    { code: 'B3', title: 'Smooth', year: 1999, yt: '6Whgn_iE5uc', note: 'With Rob Thomas. Turn it up', sl: 'linear-gradient(135deg,#ff6a00,#ee0979)' },
+    { code: 'B4', title: 'Maria Maria', year: 1999, yt: 'nPLV7lGbmT4', note: 'Maria, Maria… 🎶', sl: 'linear-gradient(135deg,#f7797d,#6a3093)' },
+  ];
   const epLabel = k => { const e = EPISODES.find(x => x.key === k); return e.special ? 'Special' : `E${e.n}`; };
 
   /* ───────── Screens ───────── */
@@ -308,7 +320,8 @@
     el.classList.add('active');
     el.scrollTop = 0;
     document.body.dataset.screen = key;
-    $('#to-home').hidden = !EP_KEYS.includes(key);
+    $('#to-home').hidden = !EP_KEYS.includes(key) && key !== 'jukebox';
+    $('#to-jukebox').hidden = key === 'jukebox';
     if (ctrl[key] && ctrl[key].enter) ctrl[key].enter();
   }
   async function show(key, { card = false } = {}) {
@@ -347,6 +360,13 @@
     show(nk, { card: nk !== 'home' });
   }));
   $('#to-home').addEventListener('click', () => { Sound.unlock(); show('home'); });
+  // Open the jukebox, straight from the tap so the song is allowed to start playing
+  function openJukebox(i) {
+    Sound.unlock();
+    show('jukebox');
+    if (i != null && cur === 'jukebox') ctrl.jukebox.play(i);
+  }
+  $('#to-jukebox').addEventListener('click', () => openJukebox());
 
   /* ───────── Trailer (the voice-over, with captions and pictures) ───────── */
   const Trailer = (() => {
@@ -541,6 +561,13 @@
       if (!b) return;
       Sound.unlock(); Sound.pop(+b.dataset.i + 1);
       toast(TOP[+b.dataset.i].msg);
+    });
+
+    const recs = $('#records');
+    recs.innerHTML = SONGS.map((s, i) => `<button class="lp" type="button" data-i="${i}" aria-label="Play ${s.title}"><span class="sleeve" style="--sl:${s.sl}"><i>${s.code}</i><em>${s.title}</em></span><span class="lp-t">${s.title}</span><small>Santana · ${s.year}</small></button>`).join('');
+    recs.addEventListener('click', ev => {
+      const b = ev.target.closest('.lp');
+      if (b) openJukebox(+b.dataset.i);
     });
 
     $$('.orig').forEach(o => o.addEventListener('click', () => Player.open(o.dataset.video, o.dataset.title)));
@@ -1360,7 +1387,44 @@
     });
     $('#trailer-end').addEventListener('click', () => { Sound.unlock(); Trailer.play(); });
     $('#home-end').addEventListener('click', () => { Sound.unlock(); show('home'); });
+    $('#jukebox-end').addEventListener('click', () => openJukebox());
     return { leave: stopMic };
+  })();
+
+  /* ───────── Bobz's Jukebox ───────── */
+  ctrl.jukebox = (() => {
+    const screen = $('#jb-screen'), idle = $('#jb-idle'), now = $('#jb-now'), grid = $('#jb-grid');
+    grid.innerHTML = SONGS.map((s, i) => `<button class="jb-rec" type="button" data-i="${i}"><span class="code">${s.code}</span><b>${s.title}</b><small>${s.year} · ${s.note}</small></button>`).join('');
+    let frame = null;
+    function play(i) {
+      const s = SONGS[i];
+      stopMedia();
+      $$('.jb-rec', grid).forEach((b, k) => b.classList.toggle('on', k === i));
+      if (!frame) {
+        frame = document.createElement('iframe');
+        frame.title = 'Santana on YouTube';
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        screen.appendChild(frame);
+      }
+      idle.hidden = true;
+      frame.src = `https://www.youtube-nocookie.com/embed/${s.yt}?autoplay=1&playsinline=1&rel=0`;
+      now.innerHTML = `Now playing: <b>${s.title}</b> · Santana, ${s.year} 🎸`;
+    }
+    // A player you can't see mustn't keep playing, so the music stops when he leaves
+    function stop() {
+      if (frame) { frame.remove(); frame = null; }
+      idle.hidden = false;
+      $$('.jb-rec', grid).forEach(b => b.classList.remove('on'));
+      now.textContent = 'Nothing playing yet';
+    }
+    grid.addEventListener('click', ev => {
+      const b = ev.target.closest('.jb-rec');
+      if (!b) return;
+      Sound.unlock();
+      play(+b.dataset.i);
+    });
+    return { play, leave: stop };
   })();
 
   /* Deep link for previews, e.g. …/bobz/#western */

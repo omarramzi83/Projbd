@@ -27,6 +27,7 @@
 <header id="bar">
   <button class="bar-btn" id="to-home" type="button" hidden>‹ Episodes</button>
   <span class="logo sm" aria-hidden="true">BOBZ<span>FLIX</span></span>
+  <button class="bar-btn round" id="to-jukebox" type="button" aria-label="Bobz’s Jukebox: Santana">🎸</button>
   <button class="bar-btn round" id="mute" type="button" aria-pressed="false" aria-label="Mute sound">
     <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-8.8v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" fill="currentColor"/></svg>
     <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4-2.7-2.7z" fill="currentColor"/></svg>
@@ -87,6 +88,11 @@
     <div class="row">
       <h2 class="row-title">Season 78 · Episodes</h2>
       <ol class="eps" id="eps"></ol>
+    </div>
+
+    <div class="row">
+      <h2 class="row-title">🎸 Bobz’s Jukebox · Santana’s greatest solos</h2>
+      <div class="records" id="records"></div>
     </div>
 
     <div class="row">
@@ -570,6 +576,7 @@
           <p class="cr-h">Special thanks</p>
           <p>Every western ever made</p><p>Seat 1A</p><p>The family WhatsApp group</p>
           <p class="cr-h">Filmed on location in</p><p>Al-Rehab City, Egypt 🇪🇬</p>
+          <p class="cr-h">Soundtrack</p><p>Carlos Santana, obviously 🎸</p>
           <p class="cr-h">Produced by</p><p>Kharem Barem Productions</p>
           <p class="cr-h">Made with love by</p><p><span class="from">Omar</span></p>
           <p class="cr-note">No films were tafee in the making of this card.</p>
@@ -582,8 +589,24 @@
         <button class="btn ghost" id="again" type="button">↺ Watch again</button>
         <button class="btn ghost" id="trailer-end" type="button">🎬 Trailer</button>
         <button class="btn ghost" id="home-end" type="button">🎞 Episodes</button>
+        <button class="btn ghost" id="jukebox-end" type="button">🎸 Jukebox</button>
       </div>
       <p class="foot">Made with love (and zero tafee) for your 78th</p>
+    </div>
+  </section>
+
+  <!-- Bobz's Jukebox · Santana -->
+  <section class="screen jukebox" data-key="jukebox" aria-label="Bobz’s Jukebox: Santana’s greatest solos">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">BOBZFLIX Music</p><h2 class="ep-title">Bobz’s Jukebox 🎸</h2><p class="ep-sub">Santana’s greatest solos. Pick a record and turn it up.</p></header>
+      <div class="jbox">
+        <div class="jb-screen" id="jb-screen">
+          <div class="jb-idle" id="jb-idle"><div class="vinyl" aria-hidden="true"></div><p>Pick a record ↓</p></div>
+        </div>
+        <p class="jb-now" id="jb-now" aria-live="polite">Nothing playing yet</p>
+        <div class="jb-grid" id="jb-grid"></div>
+      </div>
+      <p class="jb-note">The songs play from YouTube. If one doesn’t start by itself, tap the video.</p>
     </div>
   </section>
 

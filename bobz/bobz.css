@@ -57,6 +57,8 @@ img { max-width: 100%; }
 body[data-screen="tv"] #bar, body[data-screen="profiles"] #bar { display: none; }
 .bar-btn { min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .12); font: 800 15px/1 var(--f-ui); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .bar-btn.round { width: 42px; padding: 0; margin-left: auto; display: grid; place-items: center; }
+#to-jukebox { font-size: 20px; }
+#to-jukebox:not([hidden]) + #mute { margin-left: 8px; }
 .bar-btn svg { width: 22px; height: 22px; }
 #mute .i-off { display: none; }
 #mute[aria-pressed="true"] .i-on { display: none; }
@@ -648,6 +650,37 @@ body[data-screen="tv"] #bar, body[data-screen="profiles"] #bar { display: none; 
 .end-actions { flex-wrap: wrap; justify-content: center; gap: 8px; }
 .end-actions .btn { flex: 1 1 140px; }
 .foot { margin: 6px 0 0; text-align: center; font-size: 13px; color: var(--ink3); }
+
+/* ───────── Bobz's Jukebox ───────── */
+.records { display: flex; gap: 12px; margin: 0 -16px; padding: 4px 16px 10px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; }
+.records::-webkit-scrollbar { display: none; }
+.lp { flex: none; width: 132px; padding: 0; border: 0; background: none; text-align: left; scroll-snap-align: start; }
+.sleeve { position: relative; display: block; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: var(--sl); box-shadow: 0 8px 20px rgba(0, 0, 0, .45); }
+.sleeve::before { content: ""; position: absolute; right: -34%; top: 12%; width: 76%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #f2c14e 0 12%, #111 13% 16%, transparent 17%), repeating-radial-gradient(circle, #151515 0 2px, #262626 2px 4px); box-shadow: -4px 0 12px rgba(0, 0, 0, .5); }
+.sleeve em { position: absolute; left: 8px; bottom: 8px; right: 40%; font: 400 21px/.95 var(--f-disp); font-style: normal; letter-spacing: .02em; text-shadow: 0 2px 8px rgba(0, 0, 0, .45); }
+.sleeve i { position: absolute; left: 8px; top: 7px; font: 900 11px/1 var(--f-ui); font-style: normal; letter-spacing: .1em; opacity: .85; }
+.lp-t { display: block; margin-top: 7px; font: 800 14px/1.25 var(--f-ui); }
+.lp small { display: block; font-size: 12px; color: var(--ink3); }
+.jukebox { background: radial-gradient(120% 70% at 50% 0%, #4a1540, #1a0b1f 55%, #09060c); }
+.jbox { position: relative; z-index: 0; padding: 26px 14px 16px; border-radius: 150px 150px 22px 22px / 90px 90px 22px 22px; background: linear-gradient(180deg, #4a2412, #1f0f08 70%); box-shadow: 0 0 44px rgba(255, 110, 70, .35), inset 0 0 0 3px rgba(242, 193, 78, .55); }
+.jbox::before { content: ""; position: absolute; inset: -5px; z-index: -1; border-radius: inherit; background: linear-gradient(90deg, #ff3d68, #ff9a3c, #ffe66d, #3ddc97, #3da9ff, #b86bff, #ff3d68); background-size: 300% 100%; animation: neon 6s linear infinite; }
+@keyframes neon { to { background-position: 300% 0; } }
+.jb-screen { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #000; box-shadow: inset 0 0 0 3px #f2c14e, 0 6px 18px rgba(0, 0, 0, .5); }
+.jb-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.jb-idle { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 10px; color: #ffe8c8; font: 700 16px/1.2 var(--f-ui); }
+.jb-idle p { margin: 0; }
+.vinyl { width: 84px; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #ff9a3c 0 14%, #111 15% 18%, transparent 19%), repeating-radial-gradient(circle, #151515 0 2px, #2a2a2a 2px 4px); box-shadow: 0 0 20px rgba(255, 154, 60, .35); animation: spin 3s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.jb-now { margin: 12px 0; min-height: 1.4em; text-align: center; font: 700 15px/1.4 var(--f-ui); color: #ffd9a0; text-shadow: 0 0 12px rgba(255, 154, 60, .6); }
+.jb-now b { color: #fff; }
+.jb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.jb-rec { display: grid; gap: 2px; min-height: 76px; padding: 8px 10px; border: 2px solid #8a5a2a; border-radius: 8px; background: linear-gradient(180deg, #fff8e6, #f0dcb4); color: #2b1600; text-align: left; transition: box-shadow .2s, border-color .2s, transform .12s; }
+.jb-rec:active { transform: scale(.97); }
+.jb-rec .code { font: 900 11px/1 var(--f-ui); letter-spacing: .12em; color: #c8102e; }
+.jb-rec b { font: 400 21px/1 var(--f-disp); letter-spacing: .02em; }
+.jb-rec small { font-size: 12px; line-height: 1.3; color: #7a4a1a; }
+.jb-rec.on { border-color: #ff3d68; box-shadow: 0 0 0 2px #ff3d68, 0 0 18px rgba(255, 61, 104, .7); }
+.jb-note { margin: 0; text-align: center; font-size: 13px; color: var(--ink3); }
 
 /* ───────── Overlays ───────── */
 #titlecard { position: fixed; inset: 0; z-index: 70; display: grid; place-content: center; gap: 6px; padding: 20px; background: #000; text-align: center; opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s linear .3s; }
