@@ -62,6 +62,7 @@ A streaming-app birthday card for Bobz: https://omarramzi83.github.io/Projbd/bob
 - The sender's name is set in `CONFIG` at the top of `bobz/bobz.js`.
 - `bobz/audio/` holds the trailer voice-over and the cowboy line, made with Higgsfield (Seed Audio). Every other sound is synthesised in the browser.
 - Send it on WhatsApp: the link shows a BOBZFLIX poster preview (`bobz/og.jpg`).
+- Send it by email: on a computer, open https://omarramzi83.github.io/Projbd/bobz/email/send.html, press **Copy the email**, then **Open Gmail** and paste. The email itself is `bobz/email/index.html`.
 
 ## Privacy
 
