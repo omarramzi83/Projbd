@@ -350,7 +350,7 @@
 
   /* ───────── Trailer (the voice-over, with captions and pictures) ───────── */
   const Trailer = (() => {
-    const box = $('#trailer'), a = $('#trailer-audio'), cap = $('#tr-cap'), fill = $('#tr-fill');
+    const box = $('#trailer'), a = $('#trailer-audio'), cap = $('#tr-cap'), fill = $('#tr-fill'), studio = $('#tr-studio');
     const slides = $$('.tr-slide', box);
     const LEN = 33.8;
     const CUES = [
@@ -391,6 +391,7 @@
         if (s === slides.length - 1) Sound.boom();
       }
       fill.style.width = Math.min(100, (t / LEN) * 100) + '%';
+      studio.classList.toggle('on', t < 8.6);
       if (t >= LEN + 1.2) { close(); return; }
       raf = requestAnimationFrame(frame);
     }
@@ -415,6 +416,7 @@
       cancelAnimationFrame(raf);
       a.pause();
       box.hidden = true;
+      studio.classList.remove('on');
       slides.forEach(el => el.classList.remove('on'));
       const fn = after; after = null;
       if (fn) fn();
@@ -902,7 +904,7 @@
       { top: 'In 3D, for 3 hours', title: 'Space Robots vs. More Space Robots', tag: 'Part 7 of 12. Zero plot.', art: '🤖🚀', bg: 'linear-gradient(160deg,#3a7bd5,#1b1b4b 60%,#05050f)', meta: 'Sequel to the prequel', bad: true },
       { top: 'A western classic', title: 'The Good, the Bad & the Birthday', tag: 'Real cowboys. Real dust.', art: '🤠🌵', bg: 'linear-gradient(160deg,#f6b352,#a0522d 55%,#2b1308)', meta: '1966 · Technicolor', good: true },
       { top: 'Nobody asked for this', title: 'Love in the Rain (Again)', tag: 'Two hours of staring out of windows.', art: '💕🌧️', bg: 'linear-gradient(160deg,#ff9a9e,#a18cd1 60%,#2b1b3b)', meta: 'Rom-com · 2h 41m', bad: true },
-      { top: 'A BOBZFLIX Original', title: 'BOBZ (1948)', tag: 'The director’s cut. 78 years in the making.', img: 'photos/thumbs-up.jpg', bg: 'linear-gradient(180deg,#1a1a1a,#000)', meta: 'Rated T for Tremendous', bobz: true },
+      { top: 'Kharem Barem Productions presents', title: 'BOBZ (1948)', tag: 'The director’s cut. 78 years in the making.', img: 'photos/thumbs-up.jpg', bg: 'linear-gradient(180deg,#1a1a1a,#000)', meta: 'Rated T for Tremendous', bobz: true },
     ];
     let i = 0, reviewed = 0, tafee = 0, lock = false, dodges = 0;
     function render() {
