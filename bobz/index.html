@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0f">
+<meta name="robots" content="noindex, nofollow">
+<title>BOBZFLIX · Happy 78th, Bobz</title>
+<meta name="description" content="New season: Bobz turns 78. A birthday card for the legend himself.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BOBZFLIX · New season: Bobz turns 78 🎬">
+<meta property="og:description" content="A birthday card for the legend himself. Best on your phone, with the sound on 🔊">
+<meta property="og:image" content="https://omarramzi83.github.io/Projbd/bobz/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://omarramzi83.github.io/Projbd/bobz/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Bebas+Neue&family=Caveat:wght@600;700&family=Inter:wght@400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,600&family=Rye&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bobz.css">
+</head>
+<body>
+
+<!-- Top bar -->
+<header id="bar">
+  <button class="bar-btn" id="to-home" type="button" hidden>‹ Episodes</button>
+  <span class="logo sm" aria-hidden="true">BOBZ<span>FLIX</span></span>
+  <button class="bar-btn round" id="mute" type="button" aria-pressed="false" aria-label="Mute sound">
+    <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-8.8v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z" fill="currentColor"/></svg>
+    <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4-2.7-2.7z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<main id="screens">
+
+  <!-- 0 · Switch on the TV -->
+  <section class="screen tv active" data-key="tv" aria-label="Switch on the TV">
+    <canvas id="static" aria-hidden="true"></canvas>
+    <div class="crt" aria-hidden="true"></div>
+    <div class="ident" aria-hidden="true"><span class="logo xl">BOBZ<span>FLIX</span></span></div>
+    <div class="standby">
+      <p class="kicker">A special broadcast for</p>
+      <h1 class="standby-name">Bobz</h1>
+      <p class="standby-date">Channel 78 · 30 September</p>
+      <button class="power" id="power" type="button" aria-label="Switch on the TV">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9h-2zM7.05 5.64l1.41 1.42A6 6 0 1 0 15.54 7l1.41-1.41A8 8 0 1 1 7.05 5.64z" fill="currentColor"/></svg>
+      </button>
+      <p class="standby-hint">Tap to switch on · sound on 🔊</p>
+    </div>
+  </section>
+
+  <!-- Who's watching? -->
+  <section class="screen profiles" data-key="profiles" aria-label="Who's watching?">
+    <div class="prof-wrap">
+      <span class="logo md" aria-hidden="true">BOBZ<span>FLIX</span></span>
+      <h2 class="prof-title">Who’s watching?</h2>
+      <div class="prof-grid">
+        <button class="prof" type="button" data-p="bobz"><span class="av" style="--c:#e3262f">😎</span><span class="pn">Bobz</span></button>
+        <button class="prof" type="button" data-p="sujooks"><span class="av" style="--c:#f59e0b">🌭</span><span class="pn">Sujooks</span></button>
+        <button class="prof" type="button" data-p="doc"><span class="av" style="--c:#2563eb">🩺</span><span class="pn">Dr. Sadig</span></button>
+        <button class="prof" type="button" data-p="kids"><span class="av" style="--c:#16a34a">🧸</span><span class="pn">Kids</span></button>
+      </div>
+      <p class="prof-msg" id="prof-msg" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Home -->
+  <section class="screen home" data-key="home" aria-label="BOBZFLIX home">
+    <div class="hero">
+      <img class="hero-img" src="photos/thumbs-up.jpg" alt="Bobz giving a big thumbs up" decoding="async">
+      <div class="hero-body">
+        <p class="series"><span class="b">B</span> SERIES</p>
+        <h1 class="hero-title">BOBZ</h1>
+        <p class="hero-sub">The Legend Turns 78</p>
+        <p class="meta"><span class="match">100% Match</span><span>1948</span><span class="pill">TV-78</span><span>78 Seasons</span><span class="pill">4K</span></p>
+        <div class="hero-btns">
+          <button class="btn white" id="play-all" type="button">▶ Play</button>
+          <button class="btn ghost" id="trailer-btn" type="button">🎬 Trailer</button>
+        </div>
+        <p class="hero-desc">He retired at 50 to watch every film ever made. Now the man, the myth, the Turkish-coffee legend returns for his biggest season yet.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <h2 class="row-title">Season 78 · Episodes</h2>
+      <ol class="eps" id="eps"></ol>
+    </div>
+
+    <div class="row">
+      <h2 class="row-title">Top 10 in Egypt today 🇪🇬</h2>
+      <div class="top10" id="top10"></div>
+    </div>
+
+    <div class="row">
+      <h2 class="row-title">BOBZFLIX Originals</h2>
+      <div class="originals">
+        <button class="orig" type="button" data-video="video/face-off.mp4" data-title="FACE-OFF">
+          <img src="video/face-off.jpg" alt="" loading="lazy" decoding="async">
+          <span class="orig-badge">NEW</span>
+          <span class="orig-cap"><span class="orig-t">FACE-OFF</span><small>Comedy · 2023 · 0:24</small></span>
+        </button>
+        <button class="orig" type="button" data-video="video/drama-king.mp4" data-title="THE DRAMA KING">
+          <img src="video/drama-king.jpg" alt="" loading="lazy" decoding="async">
+          <span class="orig-badge">AWARD WINNER</span>
+          <span class="orig-cap"><span class="orig-t">THE DRAMA KING</span><small>Drama (obviously) · 2023 · 0:09</small></span>
+        </button>
+      </div>
+    </div>
+    <p class="home-foot">New episodes every 30th of September.</p>
+  </section>
+
+  <!-- E1 · Morning Coffee -->
+  <section class="screen ep coffee" data-key="coffee" aria-label="Episode 1: Morning Coffee">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E1</p><h2 class="ep-title">Morning Coffee</h2><p class="ep-sub">He can’t start the day without it. Make his Turkish coffee, just right.</p></header>
+
+      <div class="stove" id="stove">
+        <svg class="cz" viewBox="0 0 320 280" aria-hidden="true">
+          <defs>
+            <linearGradient id="cu" x1="0" x2="1"><stop offset="0" stop-color="#6e3714"/><stop offset=".32" stop-color="#e09a58"/><stop offset=".5" stop-color="#c17436"/><stop offset="1" stop-color="#5a2c0f"/></linearGradient>
+            <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b3a22"/><stop offset="1" stop-color="#2e1c10"/></linearGradient>
+            <radialGradient id="fm" cx=".5" cy=".75" r=".75"><stop offset="0" stop-color="#f1d6ad"/><stop offset=".6" stop-color="#cfa06a"/><stop offset="1" stop-color="#9b6436"/></radialGradient>
+            <linearGradient id="fl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1d4ed8"/><stop offset=".55" stop-color="#60a5fa"/><stop offset="1" stop-color="#fbbf24" stop-opacity=".2"/></linearGradient>
+          </defs>
+          <rect x="34" y="238" width="252" height="30" rx="9" fill="#24242b"/>
+          <rect x="34" y="238" width="252" height="6" rx="3" fill="#34343d"/>
+          <ellipse cx="160" cy="238" rx="80" ry="9" fill="#1a1a1f"/>
+          <g class="flames">
+            <path d="M104 238c-6-8-2-17 4-22 1 7 7 11 5 22z"/><path d="M122 238c-6-9-1-19 5-24 1 8 8 12 6 24z"/><path d="M140 238c-6-9-1-20 5-25 2 8 8 13 6 25z"/><path d="M158 238c-6-9-1-21 5-26 2 9 8 13 6 26z"/><path d="M176 238c-6-9-1-20 5-25 2 8 8 13 6 25z"/><path d="M194 238c-6-9-1-19 5-24 1 8 8 12 6 24z"/><path d="M212 238c-6-8-2-17 4-22 1 7 7 11 5 22z"/>
+          </g>
+          <g class="pot">
+            <ellipse cx="160" cy="121" rx="53" ry="8" fill="#2a1408"/>
+            <g class="foam-g"><path class="foam" d="M107 124c-2-10 6-15 13-14 2-9 13-13 20-8 5-8 21-9 27-1 8-5 20-2 22 8 9-2 16 6 13 15z" fill="url(#fm)"/><circle cx="131" cy="113" r="2.2" fill="#fff5e6" opacity=".7"/><circle cx="170" cy="108" r="1.8" fill="#fff5e6" opacity=".7"/><circle cx="191" cy="116" r="1.6" fill="#fff5e6" opacity=".6"/></g>
+            <path d="M107 121 118 144 96 230q64 12 128 0l-22-86 11-23q-53 12-106 0z" fill="url(#cu)"/>
+            <path d="M107 121q53 14 106 0" fill="none" stroke="#f2b477" stroke-width="3" stroke-linecap="round"/>
+            <path d="M107 121l-13-6 3 10z" fill="#a85f2a"/>
+            <path d="M203 150l92-36 5 11-92 37z" fill="url(#wood)"/>
+            <rect x="198" y="146" width="14" height="16" rx="3" transform="rotate(-21 205 154)" fill="#c9923f"/>
+            <path d="M124 170q36 8 72 0" fill="none" stroke="#f7c894" stroke-width="2" opacity=".35"/>
+            <g class="spill"><path d="M109 122q-6 16-3 34q3 8 6 0q2-16 0-32z"/><path d="M205 124q7 22 3 44q-3 9-6 0q0-22-1-42z"/><path d="M150 128q-2 14 0 24q3 6 5 0q1-12-1-24z"/></g>
+          </g>
+          <line class="gold-line" x1="98" y1="101" x2="222" y2="101"/>
+          <text class="gold-label" x="226" y="104">perfect</text>
+        </svg>
+        <div class="spoon" aria-hidden="true">🥄</div>
+        <div class="bubbles" aria-hidden="true"></div>
+      </div>
+
+      <div class="cf-panel">
+        <p class="cf-text" id="cf-text" aria-live="polite">Step 1 · Two spoons of coffee, please.</p>
+        <div class="cf-controls">
+          <button class="btn" id="cf-spoon" type="button">🥄 Add a spoon of coffee</button>
+          <div class="sugar" id="cf-sugar" hidden>
+            <button class="chip" type="button" data-s="sada"><b>سادة</b> Sada<small>no sugar</small></button>
+            <button class="chip" type="button" data-s="mazboot"><b>مظبوط</b> Mazboot<small>medium</small></button>
+            <button class="chip" type="button" data-s="ziyada"><b>زيادة</b> Ziyada<small>sweet</small></button>
+          </div>
+          <button class="btn" id="cf-stir" type="button" hidden>🌀 Stir it</button>
+          <button class="btn" id="cf-fire" type="button" hidden>🔥 Light the stove</button>
+          <button class="btn big" id="cf-lift" type="button" hidden>✋ Take it off the heat!</button>
+          <button class="btn ghost" id="cf-again" type="button" hidden>↺ Try again</button>
+        </div>
+      </div>
+
+      <div class="cup-stage" id="cup-stage" hidden>
+        <div class="cup-box">
+          <svg class="cup" viewBox="0 0 220 170" aria-hidden="true">
+            <ellipse cx="110" cy="146" rx="92" ry="16" fill="#e9e4dc"/><ellipse cx="110" cy="143" rx="72" ry="10" fill="#fbfaf7"/>
+            <path d="M58 70h104l-10 64q-42 14-84 0z" fill="#fdfcf9"/>
+            <path d="M162 84q30 0 26 22t-34 20" fill="none" stroke="#fdfcf9" stroke-width="10" stroke-linecap="round"/>
+            <ellipse cx="110" cy="70" rx="52" ry="11" fill="#3b1f0e"/>
+            <ellipse cx="110" cy="70" rx="46" ry="8" fill="#c99a63"/>
+            <circle cx="98" cy="68" r="2" fill="#f1d6ad"/><circle cx="118" cy="71" r="1.6" fill="#f1d6ad"/><circle cx="126" cy="67" r="1.4" fill="#f1d6ad"/>
+            <path d="M58 70q52 12 104 0" fill="none" stroke="#d4a64a" stroke-width="2.5"/>
+            <g class="steam"><path d="M92 58c-10-12 10-18 0-32"/><path d="M110 56c-10-12 10-18 0-34"/><path d="M128 58c-10-12 10-18 0-32"/></g>
+          </svg>
+          <div class="grounds" id="grounds" aria-hidden="true">
+            <span class="g g1">🌴</span><span class="g g2">📺</span><span class="g g3">❤️</span><span class="g g4">78</span>
+          </div>
+        </div>
+        <p class="cup-note" id="cup-note">Sabah el kheir, Bobz ☀️ Perfect wesh.</p>
+        <button class="btn" id="cf-fortune" type="button">🔮 Read my fortune in the cup</button>
+        <ul class="fortunes" id="fortunes"></ul>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E2 · Dr. Sadig, First Class -->
+  <section class="screen ep doctor" data-key="doctor" aria-label="Episode 2: Dr. Sadig, First Class">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E2</p><h2 class="ep-title">Dr. Sadig, First Class</h2><p class="ep-sub">Ear, nose, throat and eyes specialist for Saudi Airlines. He saw the whole world from seat 1A.</p></header>
+
+      <div class="card eyechart" id="eyechart">
+        <p class="ec-head">Dr. Sadig’s eye test 👁️</p>
+        <div class="ec-lines">
+          <p class="ec" style="--s:3.4">B</p>
+          <p class="ec" style="--s:2.4">O B Z</p>
+          <p class="ec" style="--s:1.8">HAPPY</p>
+          <p class="ec" style="--s:1.4">78TH</p>
+          <p class="ec" style="--s:1.12">BIRTHDAY</p>
+          <p class="ec" style="--s:.95">DR SADIG RAMZI</p>
+          <p class="ec" style="--s:.82">STILL SEES EVERYTHING</p>
+          <p class="ec" style="--s:.72">ESPECIALLY A FILM TAFEE FROM A MILE AWAY</p>
+        </div>
+        <button class="btn" id="ec-next" type="button">👓 Read the next line</button>
+      </div>
+
+      <div class="pass saudia reveal" id="pass">
+        <div class="pass-top"><span>SAUDI ARABIAN AIRLINES</span><span class="cls" id="cls">ECONOMY</span></div>
+        <div class="pass-route">
+          <div><small>From</small><b>JED</b><em>Jeddah</em></div>
+          <div class="pass-plane">✈</div>
+          <div class="to"><small>To</small><b>ANY</b><em>The whole world</em></div>
+        </div>
+        <div class="pass-grid">
+          <div><small>Passenger</small><b>DR SADIG M. RAMZI</b></div>
+          <div><small>Seat</small><b id="seat">34F</b></div>
+          <div><small>Speciality</small><b>ENT &amp; EYES</b></div>
+          <div><small>Ticket</small><b>FREE ✓</b></div>
+        </div>
+        <div class="pass-stamp" id="pass-stamp">UPGRADED</div>
+        <button class="btn gold" id="upgrade" type="button">⬆ Upgrade me</button>
+      </div>
+
+      <div class="rx reveal" id="rx">
+        <p class="rx-head">℞ <span>Prescription</span></p>
+        <p class="rx-line">Patient: <b>Sadig Mahmoud Ramzi</b> · Age: <b>78</b></p>
+        <p class="rx-line">Diagnosis: <b>Chronic legend syndrome</b></p>
+        <ol class="rx-list">
+          <li>Turkish coffee, one cup every morning ☕</li>
+          <li>Westerns, as often as needed 🤠</li>
+          <li>Pool and pergola, whenever the weather is nice ☀️</li>
+          <li>Absolutely no films tafee 🚫🎬</li>
+          <li>For back pain: see Episode 6 😉</li>
+        </ol>
+        <p class="rx-sign">Dr. <span class="from">Omar</span> <small>(not a real doctor)</small></p>
+        <p class="rx-refill">Refills: unlimited</p>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E3 · Officially Egyptian -->
+  <section class="screen ep masri" data-key="masri" aria-label="Episode 3: Officially Egyptian">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E3</p><h2 class="ep-title">Officially Egyptian</h2><p class="ep-sub">The paperwork is in. Stamp it, ya Bobz!</p></header>
+
+      <div class="cert" id="cert">
+        <div class="cert-in">
+          <p class="cert-ar">شهادة مصري أصلي</p>
+          <p class="cert-title">Certificate of Official Egyptian-ness</p>
+          <p class="cert-small">This is to certify that</p>
+          <p class="cert-name">Sadig Mahmoud Ramzi</p>
+          <p class="cert-small">is, by ancestry, by paperwork and by attitude,</p>
+          <p class="cert-big">100% Egyptian 🇪🇬</p>
+          <div class="cert-foot">
+            <div><span class="sig">Bobz</span><small>Holder</small></div>
+            <div class="seal" aria-hidden="true"><span>78</span></div>
+            <div><span class="sig">The family</span><small>Issued by</small></div>
+          </div>
+          <div class="cert-stamp" id="cert-stamp" aria-hidden="true"><b>APPROVED</b><span>مصري أصلي</span></div>
+        </div>
+      </div>
+      <button class="btn big stamp-btn" id="stamp-btn" type="button">🔨 Stamp it!</button>
+
+      <div class="checklist reveal" id="checklist">
+        <p class="kicker">The official Egyptian checklist</p>
+        <button class="chk" type="button">📜 Official paperwork</button>
+        <button class="chk" type="button">🏡 A villa in Al-Rehab</button>
+        <button class="chk" type="button">☕ Turkish coffee every morning</button>
+        <button class="chk" type="button">🇪🇬 Big fan of President Sisi</button>
+        <button class="chk" type="button">🎬 Calls bad films “tafee”</button>
+        <p class="chk-result" id="chk-result" hidden>Result: <b>100% Masri.</b> Mabrook, ya Bobz! 🇪🇬</p>
+      </div>
+      <p class="roots reveal" id="roots">Originally Sudanese 🇸🇩 · Egyptian by ancestry 🇪🇬 · married to an Irish lady ☘️<br><b>A true international man.</b></p>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E4 · Villa Rehab -->
+  <section class="screen ep villa" data-key="villa" aria-label="Episode 4: Villa Rehab">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E4</p><h2 class="ep-title">Villa Rehab</h2><p class="ep-sub">Live from the back garden: the pool, the waterfall and the pergola.</p></header>
+
+      <div class="cam" id="cam">
+        <div class="cam-view on" data-cam="pool">
+          <div class="stage-img">
+            <img src="photos/pool.jpg" alt="The pool at the villa, with its rock waterfall and dolphins on the floor" decoding="async">
+            <div class="falls" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><span class="mist"></span></div>
+            <div class="dolphin d1" aria-hidden="true">🐬</div>
+            <div class="dolphin d2" aria-hidden="true">🐬</div>
+            <button class="hot" type="button" data-t="falls" style="left:39%;top:23%;width:17%;height:19%" aria-label="Turn on the waterfall"></button>
+            <button class="hot pool-hot" type="button" data-t="dolphins" style="left:31%;top:43%;width:38%;height:52%" aria-label="Wake up the dolphins"></button>
+          </div>
+        </div>
+        <div class="cam-view" data-cam="pergola">
+          <div class="stage-img">
+            <img src="photos/pergola.jpg" alt="The pergola where Bobz has tea and lunch" loading="lazy" decoding="async">
+            <div class="lights" aria-hidden="true"></div>
+            <div class="tea" aria-hidden="true">🫖<span>☕</span><span>☕</span></div>
+            <button class="hot" type="button" data-t="tea" style="left:24%;top:40%;width:50%;height:26%" aria-label="Tea under the pergola"></button>
+          </div>
+          <p class="mom-bubble" id="mom-bubble" hidden>“Sujooks! Your tea’s getting cold!” ☕</p>
+        </div>
+        <div class="party" aria-hidden="true"></div>
+        <div class="hud" aria-hidden="true"><span class="rec">● REC</span><span class="cam-name" id="cam-name">CAM 1 · POOL</span><span class="cam-time" id="cam-time">30.09 · 16:00</span></div>
+      </div>
+      <div class="cam-switch" role="tablist">
+        <button class="on" type="button" data-cam="pool" role="tab" aria-selected="true">📹 Cam 1 · Pool</button>
+        <button type="button" data-cam="pergola" role="tab" aria-selected="false">📹 Cam 2 · Pergola</button>
+      </div>
+      <div class="todo" id="villa-todo">
+        <p class="kicker">Tap around the garden</p>
+        <button class="task" type="button" data-t="falls">💦 Turn on the waterfall</button>
+        <button class="task" type="button" data-t="dolphins">🐬 Wake up the dolphins</button>
+        <button class="task" type="button" data-t="tea">☕ Tea under the pergola</button>
+        <button class="task" type="button" data-t="party">🎈 Decorate for the party</button>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E5 · Film Tafee! -->
+  <section class="screen ep tafee" data-key="tafee" aria-label="Episode 5: Film Tafee">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E5</p><h2 class="ep-title">Film Tafee!</h2><p class="ep-sub">When a film is bad, he can’t stand it. Tonight, Bobz is the critic.</p></header>
+
+      <div class="critic">
+        <div class="poster-stage" id="poster-stage"></div>
+        <p class="critic-note" id="critic-note" aria-live="polite">Great film, or <b>film tafee</b>?</p>
+        <div class="verdict" id="verdict">
+          <button class="btn good" id="v-good" type="button">👍 Great film</button>
+          <button class="btn bad" id="v-bad" type="button">👎 Film tafee!</button>
+        </div>
+        <p class="tf-score">Films reviewed <b id="tf-count">0</b>/5 · Tafee <b id="tf-tafee">0</b></p>
+      </div>
+
+      <div class="reaction reveal" id="reaction">
+        <p class="kicker">Live audience reaction 😂</p>
+        <div class="vid-frame"><video id="reaction-vid" src="video/face-off.mp4" poster="video/face-off.jpg" playsinline controls preload="none"></video></div>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E6 · Scam Busters -->
+  <section class="screen ep scam" data-key="scam" aria-label="Episode 6: Scam Busters">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E6</p><h2 class="ep-title">Scam Busters</h2><p class="ep-sub">WhatsApp safety training for our most trusting viewer. Scam, or legit?</p></header>
+
+      <div class="phone sc-phone" id="sc-phone">
+        <div class="wa-head"><span class="wa-back">‹</span><span class="wa-av" id="sc-av">🌸</span><span class="wa-name"><b id="sc-name">Auntie</b><small id="sc-status">online</small></span></div>
+        <div class="wa-body sc-body" id="sc-body"></div>
+      </div>
+      <div class="verdict" id="sc-verdict">
+        <button class="btn bad" id="sc-scam" type="button">🚩 Scam!</button>
+        <button class="btn good" id="sc-legit" type="button">✅ Legit</button>
+      </div>
+      <p class="critic-note" id="sc-note" aria-live="polite">Is this message a scam, or legit?</p>
+      <p class="tf-score">Message <b id="sc-n">1</b>/5 · Scams spotted <b id="sc-caught">0</b></p>
+
+      <div class="sc-cert reveal" id="sc-cert">
+        <p class="sc-badge" aria-hidden="true">🛡️</p>
+        <p class="sc-title" id="sc-title">Certified Scam-Proof</p>
+        <p class="sc-text" id="sc-text"></p>
+        <p class="sc-rule"><b>Bobz’s golden rule:</b> never send card details on WhatsApp, not even to family. If someone asks, call them first 📞</p>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E6 · The Good, the Bad & the Back Pain -->
+  <section class="screen ep western" data-key="western" aria-label="Episode 7: The Good, the Bad and the Back Pain">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E7</p><h2 class="ep-title">The Good, the Bad &amp; the Back Pain</h2><p class="ep-sub">A western. Finally, a film that isn’t tafee.</p></header>
+
+      <div class="wanted" id="wanted">
+        <p class="w-top">WANTED</p>
+        <div class="w-face" aria-hidden="true">😖</div>
+        <p class="w-name">BACK PAIN</p>
+        <p class="w-crime">For crimes against Bobz’s back</p>
+        <p class="w-reward">REWARD<br><b>1 back massager</b></p>
+        <div class="w-caught" id="w-caught">CAUGHT</div>
+      </div>
+
+      <div class="duel" id="duel">
+        <svg class="west-bg" viewBox="0 0 400 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1055"/><stop offset=".45" stop-color="#b8325a"/><stop offset=".75" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ffd27a"/></linearGradient>
+            <linearGradient id="dirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a2a24"/><stop offset="1" stop-color="#1c0d10"/></linearGradient>
+            <radialGradient id="sunG"><stop offset="0" stop-color="#fff1b8"/><stop offset=".55" stop-color="#ffd27a"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="400" height="260" fill="url(#sky)"/>
+          <circle cx="200" cy="176" r="70" fill="url(#sunG)"/>
+          <circle cx="200" cy="176" r="30" fill="#fff4c9"/>
+          <path d="M0 186h40l8-26h44l10 26h60l6-14h34l8 14h90l12-34h50l10 34h38v74H0z" fill="#7a2f45"/>
+          <rect y="192" width="400" height="68" fill="url(#dirt)"/>
+          <g fill="#1a0b0e">
+            <path d="M14 196V120h66v76z"/><path d="M8 120h78v-8H8z"/><rect x="24" y="150" width="18" height="46"/><rect x="52" y="136" width="18" height="14"/>
+            <path d="M342 196v-40a8 8 0 0 1 16 0v14h8v-22a6 6 0 0 1 12 0v30a6 6 0 0 1-6 6h-14v12z"/>
+            <path d="M300 196v-22a5 5 0 0 1 10 0v22z"/>
+          </g>
+          <text x="47" y="131" text-anchor="middle" font-family="Rye, serif" font-size="9" fill="#ffd27a">SALOON</text>
+          <g class="cb hero-cb" transform="translate(96 196)">
+            <path d="M-19-58h38l-6-5c-2-9-7-13-13-13s-11 4-13 13z" fill="#140a0c"/><ellipse cx="0" cy="-58" rx="22" ry="4" fill="#140a0c"/>
+            <circle cx="0" cy="-49" r="8" fill="#140a0c"/>
+            <path d="M-11-41h22l4 26h-4l-2 15h-7l-2-12-2 12h-7l-2-15h-4z" fill="#140a0c"/>
+            <path d="M11-38l14 14-4 3-12-10z" fill="#140a0c" class="arm"/>
+          </g>
+          <g class="cb villain-cb" transform="translate(306 196)">
+            <g class="villain-body">
+              <path d="M-4-40a11 9 0 0 0-20 6l-2 34h7l3-18 4 18h7l1-22z" fill="#140a0c"/>
+              <circle cx="-25" cy="-38" r="7" fill="#140a0c"/>
+              <path d="M-38-44h26l-4-4c-2-6-5-9-9-9s-8 3-9 9z" fill="#140a0c"/><ellipse cx="-25" cy="-44" rx="15" ry="3" fill="#140a0c"/>
+              <path d="M-26-26l-14 26h3l14-24z" fill="#3b2418"/>
+            </g>
+          </g>
+          <text class="cb-label" x="96" y="212" text-anchor="middle">SHERIFF BOBZ</text>
+          <text class="cb-label" x="292" y="212" text-anchor="middle">BACK PAIN</text>
+          <g class="dust"><circle cx="292" cy="192" r="10"/><circle cx="306" cy="188" r="13"/><circle cx="320" cy="193" r="9"/></g>
+        </svg>
+        <div class="tumbleweed" aria-hidden="true"></div>
+        <div class="draw-sign" id="draw-sign" aria-hidden="true">DRAW!</div>
+        <div class="bang" id="bang" aria-hidden="true">BANG!</div>
+        <button class="duel-tap" id="duel-tap" type="button" aria-label="Draw!"></button>
+      </div>
+      <p class="duel-text" id="duel-text" aria-live="polite">When you see <b>DRAW!</b>, tap the screen as fast as you can.</p>
+      <button class="btn big" id="duel-btn" type="button">🤠 Start the duel</button>
+
+      <div class="gift reveal" id="gift">
+        <p class="kicker">Your reward, Sheriff</p>
+        <button class="giftbox" id="giftbox" type="button" aria-label="Open your present">
+          <span class="lid"></span><span class="box"></span><span class="bow">🎀</span>
+        </button>
+        <div class="gift-inside" id="gift-inside" hidden>
+          <p class="gift-emoji">💆‍♂️</p>
+          <p class="gift-title">A back massager!</p>
+          <p class="gift-text">Your real present from <span class="from">Omar</span>. Back Pain doesn’t stand a chance now 💪</p>
+        </div>
+      </div>
+
+      <figure class="amigos reveal" id="amigos">
+        <img src="photos/sombrero-both.jpg" alt="Bobz in a big blue sombrero at a Mexican restaurant" loading="lazy" decoding="async">
+        <figcaption><b>THE TWO AMIGOS</b><span>Also now showing on BOBZFLIX 🌮🤠</span></figcaption>
+      </figure>
+
+      <div class="nav"><button class="btn next" type="button" hidden>Next episode ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E7 · Make 78 Great Again -->
+  <section class="screen ep rally" data-key="rally" aria-label="Episode 8: Make 78 Great Again">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · E8</p><h2 class="ep-title">Make 78 Great Again</h2><p class="ep-sub">The rally of the year. The crowds are huge. Believe me.</p></header>
+
+      <div class="stage">
+        <svg class="cap" viewBox="0 0 300 150" aria-hidden="true">
+          <path d="M40 112q4-86 110-90 106 4 110 90z" fill="#c8102e"/>
+          <path d="M40 112q110 18 220 0 30 4 36 14-150 30-292 0 6-10 36-14z" fill="#a50d26"/>
+          <path d="M150 22q-8 46 0 94" stroke="#a50d26" stroke-width="2" fill="none"/>
+          <circle cx="150" cy="24" r="5" fill="#a50d26"/>
+          <text x="150" y="64" text-anchor="middle" class="cap-t">MAKE 78</text>
+          <text x="150" y="92" text-anchor="middle" class="cap-t">GREAT AGAIN</text>
+        </svg>
+        <figure class="rally-photo">
+          <img src="photos/thumbs-up.jpg" alt="Bobz in his red cap giving a thumbs up" loading="lazy" decoding="async">
+          <figcaption>BOBZ <span>2026</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="crowd" id="crowd" aria-hidden="true"></div>
+      <p class="chant" id="chant" aria-live="polite"></p>
+      <button class="btn big red" id="cheer" type="button">📣 Tap to cheer</button>
+      <p class="crowd-size">Crowd size: <b id="crowd-n">0</b> <small id="crowd-note">(so far)</small></p>
+
+      <div class="ticker" aria-hidden="true"><span class="tk-label">BREAKING</span><div class="tk-track"><span id="tk-text">BOBZ TURNS 78 ● Many people are saying he’s the best dad in history ● Tremendous ● Crowds in Rehab City: the biggest ever ● Turkish coffee stocks soar ● Family WhatsApp group hits 10,000 forwarded videos ● Film tafee ratings at record lows ●&nbsp;</span></div></div>
+
+      <div class="phone reveal" id="phone">
+        <div class="wa-head"><span class="wa-back">‹</span><span class="wa-av">🇪🇬</span><span class="wa-name"><b>Family ❤️</b><small>Bobz, Mom, <span class="from">Omar</span> and everyone</small></span></div>
+        <div class="wa-body" id="wa-body"></div>
+        <div class="wa-replies" id="wa-replies" hidden>
+          <button class="wa-quick" type="button" data-r="thumb">👍</button>
+          <button class="wa-quick" type="button" data-r="thanks">Thank you all ❤️</button>
+          <button class="wa-quick" type="button" data-r="fwd">↪ Forward a video</button>
+        </div>
+      </div>
+
+      <div class="nav"><button class="btn next" type="button" hidden>The Birthday Special ▶</button><button class="skip" type="button">Skip ›</button></div>
+    </div>
+  </section>
+
+  <!-- E8 · The Birthday Special -->
+  <section class="screen ep special" data-key="special" aria-label="The Birthday Special">
+    <div class="inner">
+      <header class="ep-head"><p class="ep-num">S78 · Special</p><h2 class="ep-title">The Birthday Special</h2><p class="ep-sub">Make a wish, Bobz.</p></header>
+
+      <div class="cake-stage" id="cake-stage">
+        <svg class="cake" viewBox="0 0 300 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="choc" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6b3a22"/><stop offset="1" stop-color="#3d1f10"/></linearGradient>
+            <linearGradient id="cand" x1="0" x2="1"><stop offset="0" stop-color="#f2c14e"/><stop offset=".5" stop-color="#ffe7a3"/><stop offset="1" stop-color="#d49b23"/></linearGradient>
+          </defs>
+          <ellipse cx="150" cy="236" rx="128" ry="12" fill="#1c1c22"/>
+          <ellipse cx="150" cy="232" rx="118" ry="11" fill="#e8e1d6"/>
+          <path d="M42 150h216v74q-108 18-216 0z" fill="url(#choc)"/>
+          <ellipse cx="150" cy="150" rx="108" ry="15" fill="#7b4428"/>
+          <g class="icing"><rect x="40" y="144" width="220" height="12" rx="6" fill="#fff5e8"/><rect x="42" y="150" width="12" height="14" rx="6" fill="#fff5e8"/><rect x="61" y="150" width="12" height="22" rx="6" fill="#fff5e8"/><rect x="79" y="150" width="12" height="12" rx="6" fill="#fff5e8"/><rect x="98" y="150" width="12" height="26" rx="6" fill="#fff5e8"/><rect x="116" y="150" width="12" height="16" rx="6" fill="#fff5e8"/><rect x="135" y="150" width="12" height="20" rx="6" fill="#fff5e8"/><rect x="153" y="150" width="12" height="11" rx="6" fill="#fff5e8"/><rect x="172" y="150" width="12" height="24" rx="6" fill="#fff5e8"/><rect x="190" y="150" width="12" height="15" rx="6" fill="#fff5e8"/><rect x="209" y="150" width="12" height="21" rx="6" fill="#fff5e8"/><rect x="227" y="150" width="12" height="13" rx="6" fill="#fff5e8"/><rect x="246" y="150" width="12" height="18" rx="6" fill="#fff5e8"/></g>
+          <path d="M80 104h140v50q-70 12-140 0z" fill="url(#choc)"/>
+          <ellipse cx="150" cy="104" rx="70" ry="11" fill="#7b4428"/>
+          <g class="icing"><rect x="78" y="98" width="144" height="12" rx="6" fill="#fff5e8"/><rect x="80" y="104" width="12" height="12" rx="6" fill="#fff5e8"/><rect x="98" y="104" width="12" height="20" rx="6" fill="#fff5e8"/><rect x="117" y="104" width="12" height="14" rx="6" fill="#fff5e8"/><rect x="135" y="104" width="12" height="24" rx="6" fill="#fff5e8"/><rect x="153" y="104" width="12" height="11" rx="6" fill="#fff5e8"/><rect x="171" y="104" width="12" height="18" rx="6" fill="#fff5e8"/><rect x="190" y="104" width="12" height="22" rx="6" fill="#fff5e8"/><rect x="208" y="104" width="12" height="13" rx="6" fill="#fff5e8"/></g>
+          <text x="150" y="204" text-anchor="middle" class="cake-t">Happy Birthday Bobz</text>
+          <g class="sprinkles"><rect x="60" y="208" width="6" height="2" rx="1" fill="#f2c14e" transform="rotate(20 63 209)"/><rect x="96" y="214" width="6" height="2" rx="1" fill="#e3262f" transform="rotate(-30 99 215)"/><rect x="200" y="212" width="6" height="2" rx="1" fill="#60a5fa" transform="rotate(40 203 213)"/><rect x="236" y="206" width="6" height="2" rx="1" fill="#f2c14e" transform="rotate(-20 239 207)"/><rect x="120" y="136" width="6" height="2" rx="1" fill="#e3262f" transform="rotate(25 123 137)"/><rect x="178" y="138" width="6" height="2" rx="1" fill="#60a5fa" transform="rotate(-35 181 139)"/></g>
+          <g class="cn c7"><path d="M112 40h34v9l-17 45h-11l16-43h-22z" fill="url(#cand)" stroke="#b8860b" stroke-width="1"/><line x1="129" y1="40" x2="129" y2="32" stroke="#333" stroke-width="2"/></g>
+          <g class="cn c8"><path d="M171 94c-12 0-19-7-19-15 0-6 3-10 8-12-4-2-6-6-6-10 0-8 7-13 17-13s17 5 17 13c0 4-2 8-6 10 5 2 8 6 8 12 0 8-7 15-19 15zm0-32c4 0 7-2 7-6s-3-6-7-6-7 2-7 6 3 6 7 6zm0 24c5 0 8-3 8-7s-3-7-8-7-8 3-8 7 3 7 8 7z" fill="url(#cand)" stroke="#b8860b" stroke-width="1"/><line x1="171" y1="44" x2="171" y2="32" stroke="#333" stroke-width="2"/></g>
+        </svg>
+        <button class="flame f7" type="button" style="left:43%;top:13%" aria-label="Blow out the 7"><i></i></button>
+        <button class="flame f8" type="button" style="left:57%;top:13%" aria-label="Blow out the 8"><i></i></button>
+        <span class="smoke s7" style="left:43%;top:4%"></span><span class="smoke s8" style="left:57%;top:4%"></span>
+      </div>
+      <div class="blow" id="blow">
+        <button class="btn" id="mic" type="button">🎤 Blow out the candles</button>
+        <p class="blow-or" id="blow-or">or tap the flames</p>
+        <div class="meter-wrap" id="meter-wrap" hidden><div class="meter" id="meter"></div></div>
+      </div>
+      <div class="hb reveal" id="hb">
+        <p class="hb-ar" lang="ar" dir="rtl">كل سنة وإنت طيب يا بابا</p>
+        <p class="hb-en">Happy 78th birthday, Dad!</p>
+      </div>
+
+      <article class="letter reveal" id="letter">
+        <p class="l-hi">Dear Bobz,</p>
+        <p>Happy 78th birthday! 🎂</p>
+        <p>You retired at fifty and made it look like the smartest decision in history. While the rest of us were busy working, you perfected the good life: Turkish coffee every morning, tea under the pergola, a swim when the weather’s nice, and a very strict film policy. If it’s tafee, it’s off.</p>
+        <p>You’ve been a doctor who flew the world first class, a western expert, the family’s most dedicated news reporter on WhatsApp, and now, officially, a real Egyptian. 🇪🇬</p>
+        <p>But the best role you’ve ever played is Dad. Thank you for everything, and for always giving us a big thumbs up. 👍</p>
+        <p>I hope the back massager keeps Back Pain out of town for good, and that this year brings you good health, great films and many, many more birthdays.</p>
+        <p>I love you, Dad. Kol sana w enta tayeb.</p>
+        <p class="l-sign">Your son,<br><span class="from">Omar</span></p>
+        <p class="l-ps">P.S. If anyone on WhatsApp asks for your credit card details, even family… call them first 😂</p>
+      </article>
+
+      <figure class="throwback reveal">
+        <div class="filmstrip"><img src="photos/family-1990.jpg" alt="An old family photo: Bobz, Mom and the kids" loading="lazy" decoding="async"></div>
+        <figcaption>Throwback · the original cast 📼</figcaption>
+      </figure>
+
+      <section class="credits reveal" id="credits" aria-label="End credits">
+        <div class="cr-window"><div class="cr-roll" id="cr-roll">
+          <p class="cr-top">BOBZFLIX presents</p>
+          <p class="cr-big">BOBZ<br><small>The Legend Turns 78</small></p>
+          <p class="cr-h">Starring</p><p>Sadig Mahmoud Ramzi <i>as</i> Bobz</p>
+          <p class="cr-h">Also starring</p>
+          <p>Mom <i>as</i> the only one allowed to call him “Sujooks”</p>
+          <p>Turkish coffee <i>as</i> itself</p>
+          <p>The pool, the waterfall &amp; the pergola <i>as</i> themselves</p>
+          <p>The back massager <i>as</i> the hero</p>
+          <p>Back Pain <i>as</i> the villain (defeated)</p>
+          <p>The remote control <i>as</i> the remote control</p>
+          <p>A hacked WhatsApp account <i>as</i> the scammer (nice try)</p>
+          <p class="cr-h">Special thanks</p>
+          <p>Every western ever made</p><p>Seat 1A</p><p>The family WhatsApp group</p>
+          <p class="cr-h">Filmed on location in</p><p>Al-Rehab City, Egypt 🇪🇬</p>
+          <p class="cr-h">Made with love by</p><p><span class="from">Omar</span></p>
+          <p class="cr-note">No films were tafee in the making of this card.</p>
+          <p class="cr-top">© 1948 – forever · BOBZFLIX Studios</p>
+        </div></div>
+        <button class="btn ghost" id="roll" type="button">▶ Roll the credits</button>
+      </section>
+
+      <div class="end-actions reveal" id="end-actions">
+        <button class="btn ghost" id="again" type="button">↺ Watch again</button>
+        <button class="btn ghost" id="trailer-end" type="button">🎬 Trailer</button>
+        <button class="btn ghost" id="home-end" type="button">🎞 Episodes</button>
+      </div>
+      <p class="foot">Made with love (and zero tafee) for your 78th</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Episode title card -->
+<div id="titlecard" aria-hidden="true"><p class="tc-num" id="tc-num"></p><p class="tc-title" id="tc-title"></p></div>
+
+<!-- Trailer -->
+<div id="trailer" role="dialog" aria-label="Trailer" hidden>
+  <div class="tr-slides">
+    <div class="tr-slide" data-from="0"><img src="video/drama-king.jpg" alt=""></div>
+    <div class="tr-slide" data-from="9.4"><div class="tr-sky"><span class="tr-plane">✈️</span></div></div>
+    <div class="tr-slide" data-from="13.9"><div class="tr-flag"></div></div>
+    <div class="tr-slide" data-from="18.2"><img src="video/face-off.jpg" alt=""></div>
+    <div class="tr-slide" data-from="21.9"><img src="photos/thumbs-up.jpg" alt=""></div>
+    <div class="tr-slide" data-from="26.6"><div class="tr-logo"><span class="logo xl">BOBZ<span>FLIX</span></span></div></div>
+  </div>
+  <p class="tr-cap" id="tr-cap" aria-live="polite"></p>
+  <div class="tr-bar"><i id="tr-fill"></i></div>
+  <button class="tr-skip" id="tr-skip" type="button">Skip ›</button>
+</div>
+
+<!-- Video player -->
+<div id="player" role="dialog" aria-label="Video player" hidden>
+  <div class="pl-box">
+    <p class="pl-title" id="pl-title"></p>
+    <video id="pl-video" playsinline controls preload="none"></video>
+    <button class="btn ghost" id="pl-close" type="button">✕ Close</button>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<audio id="trailer-audio" src="audio/trailer.mp3" preload="none"></audio>
+<audio id="cowboy-audio" src="audio/cowboy.mp3" preload="none"></audio>
+
+<script src="bobz.js"></script>
+</body>
+</html>

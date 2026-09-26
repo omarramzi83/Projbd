@@ -42,6 +42,27 @@ Pasting it in yourself keeps the animated picture and the direct link. A draft m
 - Sound effects are all synthesised in the browser. The audio files are her song (`assets/music/cookies-original.mp3`) and the captain's voice (`assets/ai/captain.mp3`).
 - `assets/ai/` holds pieces made with Higgsfield: the captain's voice (Seed Audio), the painted postcards, the two paintings and the bouquet (Z-Image). None of them show people's faces.
 
+## BOBZFLIX · Dad's 78th (`bobz/`)
+
+A streaming-app birthday card for Bobz: https://omarramzi83.github.io/Projbd/bobz/
+
+1. **Switch on the TV**, pick a profile (Bobz, Sujooks, Dr. Sadig… or Kids) and watch the trailer (a real voice-over)
+2. **Home:** the "BOBZ" billboard, the episode list, Top 10 in Egypt and two BOBZFLIX Originals (the Snapchat videos)
+3. **E1 Morning Coffee:** make Turkish coffee, take it off at the perfect foam, read the cup
+4. **E2 Dr. Sadig, First Class:** eye chart, Saudi Airlines boarding pass upgrade, a prescription
+5. **E3 Officially Egyptian:** stamp the certificate, tick the checklist
+6. **E4 Villa Rehab:** live cams of the pool and pergola: waterfall, dolphins, tea with Mom, party mode
+7. **E5 Film Tafee!:** rate the films (the tafee button won't let him tafee his own film)
+8. **E6 Scam Busters:** scam or legit? WhatsApp safety training
+9. **E7 The Good, the Bad & the Back Pain:** a quick-draw duel, and the back massager reveal
+10. **E8 Make 78 Great Again:** cheer the rally, then the family WhatsApp group
+11. **The Birthday Special:** blow out the 78 candles, the letter, a throwback and the end credits
+
+- Preview a single episode by adding its name to the link, e.g. `…/bobz/#western`. The names are `home`, `coffee`, `doctor`, `masri`, `villa`, `tafee`, `scam`, `western`, `rally` and `special`.
+- The sender's name is set in `CONFIG` at the top of `bobz/bobz.js`.
+- `bobz/audio/` holds the trailer voice-over and the cowboy line, made with Higgsfield (Seed Audio). Every other sound is synthesised in the browser.
+- Send it on WhatsApp: the link shows a BOBZFLIX poster preview (`bobz/og.jpg`).
+
 ## Privacy
 
-The repository and the site are public. Anyone who has the link, or who finds the repository, can see the photos, the letter and the song. The page asks search engines not to index it. The photos' location data (GPS) was removed before they were added.
+The repository and the site are public, and both cards live on the same site. Anyone who has a link, or who finds the repository, can see the photos, the videos, the letters and the song. The pages ask search engines not to index them. Location data (GPS) and other metadata were removed from the photos and videos before they were added.
